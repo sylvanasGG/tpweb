@@ -1,0 +1,30 @@
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">编辑评论</div>
+
+                    <div class="panel-body">
+
+                        <form action="{:U('comment/update/',array('id'=>$comment['id']))}" method="POST">
+                            <b>昵称: </b>
+                            <input type="text" name="nickname" class="form-control" required="required" value="{$comment['nickname']}">
+                            <br>
+                            <b>Email:</b>
+                            <input type="text" name="email" class="form-control" value="{$comment['email']}">
+                            <br>
+                            <b>个人网站:</b>
+                            <input type="text" name="website" class="form-control" value="{$comment['website']}">
+                            <br>
+                            <b>评论内容:</b>
+                            <textarea name="content" rows="10" class="form-control" required="required">{$comment['content']}</textarea>
+                            <br>
+                            <button class="btn btn-lg btn-info">提交修改</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

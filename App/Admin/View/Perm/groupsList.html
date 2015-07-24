@@ -1,0 +1,73 @@
+<h1>管理组</h1>
+
+<div class="box">
+    <div class="box-header with-border">
+
+    </div><!-- /.box-header -->
+    <form action="{:U('Perm/postGroupsList')}" method="post">
+    <div class="box-body">
+        <table class="table table-bordered table-hover">
+            <colgroup>
+                <col style="width: 10%" />
+                <col style="width: 20%" />
+                <col  />
+
+            </colgroup>
+            <thead>
+            <tr>
+                <td><strong>删除</strong></td>
+                <td><strong>职务名称</strong></td>
+                <td><strong>操作</strong></td>
+            </tr>
+            </thead>
+            <tbody id="memberList">
+            <foreach name="groupAll" item="group" >
+            <tr>
+                <td>
+                    <input name="delete[]" value="{$group['cp_group_id']}" class="checkbox" type="checkbox">
+                </td>
+                <td>
+                    <div class="input-group input-group-sm">
+                       <input name="name[{$group['cp_group_id']}]" value="{$group['cp_group_name']}" class="form-control">
+
+                    </div>
+                </td>
+                <td><a href="{:U('Perm/showGroupPerm',array('id'=>$group['cp_group_id']))}">编辑</a></td>
+            </tr>
+            </foreach>
+            <tr>
+                <td>新增</td>
+                <td>
+                    <div class="input-group input-group-sm">
+                        <input name="new_cp_group_name" class="form-control" value="" type="text" placeholder="职务名称">
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+
+            </tbody>
+
+            <tfoot>
+            <tr>
+                <td>
+                    <label for="selectAll"><input type="checkbox" id="selectAll" name="slectALL" class="select-all" value="">全选</label>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="box-footer clearfix">
+        <div class="pull-left">
+            <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        bindSelectAll('#selectAll','#memberList > tr > td > input[type=checkbox]'); // 绑定全选
+    });
+</script>

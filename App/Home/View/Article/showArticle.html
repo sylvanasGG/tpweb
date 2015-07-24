@@ -1,0 +1,107 @@
+
+    <if condition="isset($article)">
+            <article id="{$article['id']}" class="post tag-laravel tag-laravel-5-1 tag-xin-ban-ben-fa-bu">
+
+                <div class="post-head">
+                    <h1 class="post-title"><a href="/post/laravel-5-1-is-released/">{$article['title']}</a></h1>
+                    <div class="post-meta">
+                        <span class="author">作者：<a href="#" style="color: #f4645f">{$article['author']}</a></span> &bull;
+                        <time class="post-date" title="{$article['updated_at']}">{$article['updated_at']}</time>
+                    </div>
+                </div>
+                <div class="featured-media">
+                    <a href="#"><img src="{$article['article_photo']}" alt="Laravel 5.1 LTS 版本正式发布"></a>
+                </div>
+                <div class="post-content">
+                    <p>{$article['content']}</p>
+                </div>
+                <div class="post-permalink">
+
+                </div>
+
+                <footer class="post-footer clearfix">
+                    <div class="pull-left tag-list">
+                        <i class="fa fa-folder-open-o"></i>
+                        <a href="/post/"><?php echo \Common\Common\ArticleLib::$ARTICLE_TYPE[$article['article_type']]?></a><a href="/tag/laravel-5-1/"></a><a href="/tag/xin-ban-ben-fa-bu/"></a>
+                    </div>
+                    <div class="pull-right share">
+                    </div>
+                </footer>
+            </article>
+    </if>
+
+<div id="comments" style="margin-bottom: 100px;">
+
+        <div class="conmments" >
+                <foreach name='comments' item='comment'>
+                    <div class="one" style="border-top: solid 5px #49B544; padding: 0px 20px;background-color:#ffffff">
+                        <div class="nickname" data="{$comment['nickname']}">
+                            <if condition="$comment['website']">
+                                <a href="">
+                                    <h3>{$comment['nickname']}</h3>
+                                </a>
+                            <else />
+                                <h3>{$comment['nickname']}</h3>
+                            </if>
+                            <h6>{$comment['created_at']}</h6>
+                        </div>
+                        <div class="content">
+                            <p style="padding: 20px;">
+                                {$comment['content']}
+                            </p>
+                        </div>
+                        <div class="reply" style="text-align: right; padding: 5px;">
+                            <a href="#new" onclick="reply(this);">回复</a>
+                        </div>
+                    </div>
+
+                </foreach>
+            </div>
+            
+        <div id="new" style="border:2px solid gray;border-top: solid 5px #49B544;margin-top:20px;">
+            <form action="{:U('Comment/create')}" method="POST" class="form-horizontal">
+                <input type="hidden" name="article_id" value="{$article['id']}">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-9">
+                    <input type="text" name="nickname" class="form-control" style="width: 300px;" required="required" placeholder="用户名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">邮箱地址</label>
+                    <div class="col-sm-9">
+                    <input type="email" name="email" class="form-control" style="width: 300px;" placeholder="邮箱地址">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">个人主页</label>
+                    <div class="col-sm-9">
+                    <input type="text" name="website" class="form-control" style="width: 300px;" placeholder="个人主页">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">评论</label>
+                    <div class="col-sm-9">
+                    <textarea name="content" id="newFormContent" class="form-control" rows="2" required="required" placeholder="评论"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                      <button type="submit" class="btn btn-lg btn-success col-lg-12">Submit</button>
+                    </div>
+                  </div>
+                
+            </form>
+        </div>
+
+        <script>
+            function reply(a) {
+                var nickname = a.parentNode.parentNode.firstChild.nextSibling.getAttribute('data');
+                var textArea = document.getElementById('newFormContent');
+                textArea.innerHTML = '@'+nickname+' ';
+            }
+        </script>
+
+
+    </div>
+

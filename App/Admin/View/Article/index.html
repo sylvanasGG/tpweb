@@ -1,0 +1,48 @@
+<style>
+    .pagelist{
+        font-size:18pt;
+        display: inline-block;
+        margin-right: 10px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">文章管理</div>
+
+                <div class="panel-body">
+
+                    <a href="{:U('Article/create')}" class="btn btn-lg btn-primary">新增</a>
+
+                    <foreach name='articles' item='article'>
+                        <hr>
+                        <div class="page">
+                            <if condition="$article['article_type']">
+                                <p><span><b>文章类型：</b></span><span><?php echo \Common\Common\ArticleLib::$ARTICLE_TYPE[$article['article_type']]?></span></p>
+                            </if>
+                            <p><span><b>文章开头图片：</b></span><a href="{$article['article_photo']}" target="__blank">{$article['article_photo']}</a></p>
+                            <p><span><b>文章标题：</b></span><span>{$article['title']}</span></p>
+                            <p><span><b>发表时间：</b></span><span>{$article['updated_at']}</span></p>
+
+                            <label>文章内容：</label>
+                            <div class="content">
+                                <p>
+                                    <?php echo Fun::mixSub(strip_tags($article['content']),200)?>
+                                </p>
+                            </div>
+                        </div>
+                        <a href="{:U('Article/edit',array('id'=>$article['id']))}" class="btn btn-success">编辑</a>
+
+                        <form action="{:U('Article/delete',array('id'=>$article['id']))}" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">删除</button>
+                        </form>
+                    </foreach>
+                    <div class="col-sm-4 col-sm-offset-8">
+                        <div class ="pagination pagination-lg pagelist" style="">{$page}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

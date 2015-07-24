@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>FIRSTBLOOD</title>
+    <meta name="description" content="Laravel是一套简洁、优雅的PHP Web开发框架(PHP Web Framework) -- Laravel中文网" />
+    <meta name="keywords" content="Laravel中文社区,php框架,laravel中文网,php framework,restful routing,laravel,laravel php">
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/AdminLTE/asset/css/index.css" />
+    <link href="https://res.wx.qq.com/mpres/htmledition/images/favicon218877.ico" rel="Shortcut Icon">
+<!--     <load href="__PUBLIC__/css/page.css" / > 
+ -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        a,a:hover{ text-decoration:none; color:#000000}
+        ul li{
+            list-style-type: none;
+        }
+        .nav-list{
+            padding:4px 0;
+            margin:0;
+        }
+        .nav-list li{
+            display: inline-block;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body style="background-image: url(__PUBLIC__/img/1.jpg)">
+<!--header start-->
+<header class="container-fluid" style="margin-bottom: 0;padding-top: 10px;padding-bottom: 50px;">
+    <div class="row">
+        <!--标头-->
+        <div class="col-sm-12" style="text-align: center">
+
+            <h1 style="color: white"><span class="hide">Laravel - </span>FIRSTBLOOD</h1>
+        </div>
+        <div class="col-sm-12" style="text-align: center">
+            <!--<a href="http://lol.qq.com/main.shtml" class="btn btn-default btn-doc" target="_blank">英雄联盟</a>-->
+            <!--<a href="http://www.5eplay.com/game/cs" class="btn btn-default btn-doc" target="_blank">CS:GO</a>-->
+            <!--<a href="http://www.pconline.com.cn/" class="btn btn-default btn-doc" target="_blank">数码科技</a>-->
+            <!--&lt;!&ndash;<a href="http://www.golaravel.com/laravel/docs/4.1/" class="btn btn-default btn-doc" target="_blank">4.1 中文文档</a>&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="http://www.golaravel.com/laravel/docs/4.0/" class="btn btn-default btn-doc" target="_blank">4.0 中文文档</a>&ndash;&gt;-->
+            <!--<a href="http://www.golaravel.com/laravel/docs/" class="btn btn-default btn-doc" target="_blank">laravel文档</a>-->
+            <!--<a href="http://v3.bootcss.com/" class="btn btn-default btn-doc" target="_blank">bootstrap文档</a>-->
+        </div>
+    </div>
+</header>
+<!--header end-->
+
+<!-- start navigation -->
+<nav class="navbar navbar-default" style="background-color: #ffffff;margin-bottom:0px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center">
+                <ul class="nav nav-list">
+                    <li><a href="{:U('Index/index')}">首页</a></li>
+                    <li><a href="{:U('Article/showArticleFeilei',array('name'=>'game'))}">游戏</a></li>
+                    <li><a href="{:U('Article/showArticleFeilei',array('name'=>'word'))}">文字</a></li>
+                    <li><a href="{:U('Article/showArticleFeilei',array('name'=>'code'))}">编程</a></li>
+                    <li><a href="{:U('Article/showArticleFeilei',array('name'=>'other'))}">其他</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PHP<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://www.golaravel.com/" target="_blank">laravel</a></li>
+                            <li><a href="#" target="_blank">Another action</a></li>
+                            <li><a href="#" target="_blank">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#" target="_blank">Separated link</a></li>
+                            <li><a href="#" target="_blank">One more separated link</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">laravel<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://www.golaravel.com/" target="_blank">golaravel.com</a></li>
+                            <li><a href="http://laravelbase.com/" target="_blank">laravelbase</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">git<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank">git入门</a></li>
+                            <li><a href="http://www.tuicool.com/articles/bEz6Vf" target="_blank">git使用手册</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- end navigation -->
+
+<!--main content-->
+<section class="content-wrap">
+    <div class="container-fluid">
+        <div class="row" >
+            <main class="col-md-7 col-md-offset-1 main-content" style="margin-top:20px;">
+            {__CONTENT__}
+
+            </main>
+            <!--main right-->
+            <aside class="col-md-3 sidebar" style="margin-top:20px;">
+                <!-- start widget -->
+                <!-- end widget -->
+
+                <!-- start tag cloud widget -->
+                <div class="widget">
+                    <h4 class="title">公告</h4>
+                    <div class="content community">
+                        <p><b>承接网站制作、微信开发</b></p>
+                        <p><b>联系邮箱：</b>77849093@qq.com</p>
+                        <p><b>联系手机：</b>15827535604</p>
+                    </div>
+                </div>
+                <!-- end tag cloud widget -->
+
+                <!-- start widget -->
+                <div class="widget">
+                    <h4 class="title">搬砖地址</h4>
+                    <div class="content download">
+                        <a href="http://blog.snsgou.com/post-42.html" class="btn btn-default btn-block" target="_blank">PHP反射入门教程</a>
+                        <a href="http://www.cnblogs.com/taletao/p/4212916.html" class="btn btn-default btn-block" target="_blank">国外程序员收集整理的 PHP 资源大全</a>
+
+                    </div>
+                </div>
+                <!-- end widget -->
+                <div class="widget">
+                    <h4 class="title">扫描并关注</h4>
+                    <div class="content download">
+                    <img src="__PUBLIC__/AdminLTE/asset/img/weixinGZH.jpg" style="width:100%;height:100%">
+                    </div>
+                </div>
+
+                <!-- start tag cloud widget -->
+                <div class="widget">
+                    <h4 class="title">标签云</h4>
+                    <div class="content tag-cloud">
+                        <a href="/tag/laravel/">Laravel</a>
+                        <a href="/tag/laravel-5/">Laravel 5</a>
+                        <a href="/tag/getting-started-with-laravel/">Laravel入门教程</a>
+                        <a href="/tag/eloquent/">Eloquent</a>
+                        <a href="/tag/laravle5/">laravle5</a>
+                        <a href="/tag/laravel-5-1/">Laravel 5.1</a>
+                        <a href="/tag/orm/">ORM</a>
+                        <a href="/tag/xin-ban-ben-fa-bu/">新版本发布</a>
+                        <a href="/tag/lts/">LTS</a>
+                        <a href="/tag/php/">PHP</a>
+                        <a href="/tag/composer/">Composer</a>
+                        <a href="/tag/wei-kuang-jia/">微框架</a>
+                        <a href="/tag/lumen/">Lumen</a>
+                        <a href="/tag/ming-ming-kong-jian/">命名空间</a>
+                        <a href="/tag/laravel4/">Laravel4</a>
+                        <a href="/tag/whoops/">Whoops</a>
+                        <a href="/tag/event/">Event</a>
+                        <a href="/tag/sheng-ji/">升级</a>
+
+
+                        <a href="/tag-cloud/">...</a>
+                    </div>
+                </div>
+            </aside><!--end main right-->
+        </div><!--end row-->
+    </div>
+</section>
+<!--end main content-->
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="widget">
+                    <h4 class="title">友情链接</h4>
+                    <div class="content recent-post"></div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="widget">
+                    <h4 class="title">标签云</h4>
+                    <div class="content tag-cloud">
+                        <a href="/tag/laravel/">Laravel</a>
+                        <a href="/tag/laravel-5/">Laravel 5</a>
+                        <a href="/tag/getting-started-with-laravel/">Laravel入门教程</a>
+                        <a href="/tag/eloquent/">Eloquent</a>
+                        <a href="/tag/laravle5/">laravle5</a>
+                        <a href="/tag/laravel-5-1/">Laravel 5.1</a>
+                        <a href="/tag/orm/">ORM</a>
+                        <a href="/tag/xin-ban-ben-fa-bu/">新版本发布</a>
+                        <a href="/tag/lts/">LTS</a>
+                        <a href="/tag/php/">PHP</a>
+                        <a href="/tag/composer/">Composer</a>
+                        <a href="/tag/wei-kuang-jia/">微框架</a>
+                        <a href="/tag/lumen/">Lumen</a>
+                        <a href="/tag/ming-ming-kong-jian/">命名空间</a>
+                        <a href="/tag/laravel4/">Laravel4</a>
+
+
+                        <a href="/tag-cloud/">...</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="widget">
+                    <h4 class="title">合作伙伴</h4>
+                    <div class="content tag-cloud friend-links">
+                        <a href="http://www.bootcss.com" title="Bootstrap中文网" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'bootcsscom'])" target="_blank">Bootstrap中文网</a>
+                        <a href="http://www.bootcdn.cn" title="开放CDN服务" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'bootcdncn'])" target="_blank">开放CDN服务</a>
+                        <a href="http://www.gruntjs.net" title="Grunt中文网" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'gruntjsnet'])" target="_blank">Grunt中文网</a>
+                        <hr>
+                        <a href="https://www.upyun.com/" title="又拍云" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'upyun'])" target="_blank">又拍云</a>
+                        <a href="http://www.ucloud.cn/" title="UCloud" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'ucloud'])" target="_blank">UCloud</a>
+                    </div>
+                </div></div>
+        </div>
+    </div>
+</footer>
+
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>Copyright &copy; <a href="http://www.golaravel.com/">FIRSTBLOOD</a></span> |
+                <span><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备11008151号</a></span> |
+                <span>京公网安备11010802014853</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="__PUBLIC__//AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="__PUBLIC__/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
+<!--<script src="public/js/index.js"></script>-->
+<script>
+    $(function(){
+        $(".main-right-content .post-content p a").addClass("btn btn-default btn-sm");
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    })
+</script>
+</body>
+</html>
+

@@ -1,0 +1,57 @@
+
+    <style>
+        .pagelist{
+            font-size:18pt;
+            display: inline-block;
+            margin-right: 10px; 
+        }
+    </style>
+    <if condition="isset($articles)">
+    <foreach name="articles" item="val">
+        <article id="{$val['id']}" class="post tag-laravel tag-laravel-5-1 tag-xin-ban-ben-fa-bu" style="margin-bottom:20px;">
+
+        <div class="post-head">
+            <h1 class="post-title"><a href="">{$val['title']}</a></h1>
+            <div class="post-meta">
+                <span class="author">作者：<a href="#" style="color: #f4645f">{$val['author']}</a></span> &bull;
+                <time class="post-date"  title="{$val['updated_at']}">{$val['updated_at']}</time>
+            </div>
+        </div>
+        <div class="featured-media">
+            <!--<a href="#"><img src="{$val['article_photo']}" alt="图片" style="height:200px;"></a>-->
+        </div>
+        <div class="post-content">
+            <p><?php echo Fun::mixSub(strip_tags($val['content']),200)?></p>
+        </div>
+        <div class="post-permalink">
+            <a href="{:U('Article/show',array('id'=>$val['id']))}" class="btn btn-default">阅读全文</a>
+        </div>
+
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <i class="fa fa-folder-open-o"></i>
+                <a href=""><?php echo \Common\Common\ArticleLib::$ARTICLE_TYPE[$val['article_type']]?></a><a href="/tag/laravel-5-1/"></a><a href="/tag/xin-ban-ben-fa-bu/"></a>
+            </div>
+            <div class="pull-right share">
+            </div>
+        </footer>
+    </article>
+
+    </foreach>
+        <div class="col-sm-4 col-sm-offset-8" style="margin-bottom: 20px;">
+           
+        </div>
+    <else />
+        <article class="post tag-laravel tag-laravel-5-1 tag-xin-ban-ben-fa-bu">
+            <div class="post-head">
+                <h1 class="post-title">抱歉，暂时没有相关文章</h1>
+            </div>
+        </article>
+    </if>
+    
+    <article class="post" style="height:50px;">
+            
+        <div class ="pagination pagination-lg pagelist" style="float:right">{$page}</div>
+            
+        </article>
+

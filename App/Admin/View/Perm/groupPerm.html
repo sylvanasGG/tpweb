@@ -1,0 +1,104 @@
+<div class="box">
+
+    <div class="box-header with-border">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="input-group input-group-sm">
+                    <p>职务：<span>(设置当前管理团队成员的职务)</span></p>
+                    <select name="gid" id="_gid" class="form-control">
+                        <foreach name="groupAll" item="group">
+                            <?php
+                                $selected='';if($id == $group['cp_group_id'])$selected="selected='selected'"
+                            ?>
+                        <option value="{$group['cp_group_id']}" {$selected} >{$group['cp_group_name']}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.box-header -->
+    <form action="{:U('Perm/postGroupPerm',array('id'=>$id))}" method="post">
+        <div class="box-body">
+
+            <table class="table table-bordered">
+
+                <tbody id="menuList">
+                <foreach name="menuList" item="val" key="key">
+                <tr style="background-color:#eaf3fa">
+                    <td>
+                        <div class="checkbox" style="margin: 0">
+                            <label><input type="checkbox" value="" onclick="PermCheckAll(this, 'access_{$key}')">{$val['treeView']['name']}</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="access_{$key}">
+                        <div class="row">
+                            <foreach name="val['treeViewMenu']" item="item">
+
+                            <div class="col-sm-2" style="border-right: 1px solid #808080">
+                                <div class="checkbox" style="margin: 0">
+                                    <label>
+                                        <?php
+                                            $checked = '';
+                                            if(in_array($item['actionName'], $groupAccess))
+                                            {
+                                                $checked = checked;
+                                            }
+                                        ?>
+                                        <input type="checkbox" value="{$item['actionName']}" {$checked} name="perm_allow[]">{$item['name']}
+
+                                    </label>
+                                </div>
+                            </div>
+
+                            </foreach>
+                        </div>
+                    </td>
+                </tr>
+                </foreach>
+                </tbody>
+
+                <tfoot>
+
+                </tfoot>
+            </table>
+
+        </div>
+        <div class="box-footer clearfix">
+            <div class="pull-left">
+                <button type="submit" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function(){
+        $("#_gid").change( function() {
+            var cp_group_id = $(this).find("option:selected").val();
+            var url = '__ROOT__'+'/index.php/Admin/Perm/showGroupPerm/id/'+cp_group_id+'.html';
+            location.href = url;
+        });
+    });
+    /**
+     * 权限全选
+     */
+    function PermCheckAll(obj, perms, t) {
+        var t = !t ? 0 : t;
+        var checkboxs = $("#"+perms).find(":checkbox");
+        for(var i = 0; i < checkboxs.length; i++) {
+            var e = checkboxs[i];
+            if(e.type == 'checkbox') {
+                if(!t) {
+                    if(!e.disabled) {
+                        e.checked = obj.checked;
+                    }
+                } else {
+                    if(obj != e) {
+                        e.style.visibility = obj.checked ? 'hidden' : 'visible';
+                    }
+                }
+            }
+        }
+    }
+</script>

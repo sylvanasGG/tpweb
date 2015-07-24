@@ -1,0 +1,84 @@
+<style>
+        .pagelist{
+            font-size:18pt;
+            display: inline-block;
+            margin-right: 10px; 
+        }
+    </style>
+<div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">管理评论</div>
+
+                    <div class="panel-body">
+
+                        <table class="table table-striped">
+                            <tr class="row">
+                                <th class="col-lg-4">Content</th>
+                                <th class="col-lg-2">User</th>
+                                <th class="col-lg-4">Article</th>
+                                <th class="col-lg-1">编辑</th>
+                                <th class="col-lg-1">删除</th>
+                            </tr>
+                            <foreach name='comments' item='comment'>
+                                <tr class="row">
+                                    <td class="col-lg-6">
+                                        {$comment['content']}
+                                    </td>
+                                    <td class="col-lg-2">
+                                        <if condition="$comment['website']">
+                                            <a href="{$comment['website']}">
+                                                <h4>{$comment['nickname']}</h4>
+                                            </a>
+                                        <else />
+                                            <h3>{$comment['nickname']}</h3>
+                                        </if>
+                                        {$comment['email']}
+                                    </td>
+                                    <td class="col-lg-4">
+                                        <a href="{:U('Article/show',array('id'=>$comment['article_id']))}" >
+                                            <?php $article = new \Home\Model\ArticleModel();$mod=$article->where('id='.$comment['article_id'])->find();echo $mod['title']?>
+                                        </a>
+                                    </td>
+                                    <td class="col-lg-1">
+                                        <a href="{:U('Comment/edit',array('id'=>$comment['id']))}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
+                                    </td>
+                                    <td class="col-lg-1">
+                                        <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{$comment['id']}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
+                                    </td>
+                                </tr>
+                            </foreach>
+                        </table>
+                        <div class="col-sm-4 col-sm-offset-8">
+                            <div class ="pagination pagination-lg pagelist">{$page}</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function del(e)
+    {
+        if(!confirm('确定要删除吗？'))
+        {
+            return false;
+        }
+        var obj = $(e);
+        var id = obj.attr("rel");
+        $.ajax({
+            url: "{:U('Comment/delete')}",
+            type: "GET",
+            data: {"id":id},
+            dataType: "json",
+            success: function( result ){
+                if ( result.ret == 0 ) {
+                    obj.parent().parent().remove();
+                    alert(result.msg);
+                }
+            }
+        });
+    }
+</script>

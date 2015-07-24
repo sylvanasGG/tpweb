@@ -1,0 +1,113 @@
+<h1>管理权限 <span style="color: #336699"><strong>{$user['name']}</strong></span></h1>
+
+<div class="box">
+    <form action="{:U('Perm/postPersonalPerm',array('id'=>$user['id']))}" method="post">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="input-group input-group-sm">
+                        <p>职务：<span>(设置当前管理团队成员的职务)</span></p>
+                        <select name="cp_group_id_new" id="_cp_group_id_new" class="form-control">
+                            <foreach name="groupAll" item="group">
+                                <?php
+                                $selected='';if($cp_group_id == $group['cp_group_id'])$selected="selected='selected'"
+                            ?>
+                                <option value="{$group['cp_group_id']}" {$selected} >{$group['cp_group_name']}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+            <table class="table table-bordered">
+
+                <tbody id="menuList">
+                <foreach name="menuList" item="val" key="key">
+                <tr style="background-color:#eaf3fa">
+                    <td>
+                        <div class="checkbox" style="margin: 0">
+                            <label><input type="checkbox" value="" onclick="PermCheckAll(this, 'access_{$key}')">{$val['treeView']['name']}</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="access_{$key}">
+                        <div class="row">
+                            <foreach name="val['treeViewMenu']" item="item">
+                            <?php
+                                $checked = $customChecked = false;
+                                if(in_array($item['actionName'], $groupAccess))$checked=true;
+                                if(in_array($item['actionName'], $user['custom_access']))$customChecked = true;
+                                if($checked)
+                                {
+                                    if(! $customChecked){
+                                        $extra = 'checked';
+                                    }else{
+                                       $extra = '';
+                                    }
+                                } else{
+                                  $extra = 'disabled';
+                                }
+                            ?>
+                            <div class="col-sm-2" style="border-right: 1px solid #808080;">
+                                <div class="checkbox" style="margin: 0">
+                                    <?php
+                                        if($extra == 'disabled') $style="style='color:#808080'";
+                                    ?>
+                                    <label {$extra} >
+                                    <input type="checkbox" value="{$item['actionName']}" {$extra} {$style} name="access_new[]">{$item['name']}
+                                    </label>
+                                </div>
+                            </div>
+                            </foreach>
+                        </div>
+                    </td>
+                </tr>
+                </foreach>
+                </tbody>
+
+                <tfoot>
+
+                </tfoot>
+            </table>
+        </div>
+        <div class="box-footer clearfix">
+            <div class="pull-left">
+                <button type="submit" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function(){
+        $("#_cp_group_id_new").change( function() {
+            var cp_group_id = $(this).find("option:selected").val();
+            var id = "{$user['id']}";
+            var url = '__ROOT__'+'/index.php/Admin/Perm/showPersonalPerm/id/'+id+'.html?cp_group_id='+cp_group_id;
+            location.href = url;
+        });
+    });
+    /**
+     * 权限全选
+     */
+    function PermCheckAll(obj, perms, t) {
+        var t = !t ? 0 : t;
+        var checkboxs = $("#"+perms).find(":checkbox");
+        for(var i = 0; i < checkboxs.length; i++) {
+            var e = checkboxs[i];
+            if(e.type == 'checkbox') {
+                if(!t) {
+                    if(!e.disabled) {
+                        e.checked = obj.checked;
+                    }
+                } else {
+                    if(obj != e) {
+                        e.style.visibility = obj.checked ? 'hidden' : 'visible';
+                    }
+                }
+            }
+        }
+    }
+</script>
+
