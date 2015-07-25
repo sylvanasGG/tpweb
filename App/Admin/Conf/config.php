@@ -15,39 +15,38 @@ return array(
     //'DEFAULT_THEME'    =>    'admin'
 
     'LAYOUT_MENU'=>array(
-        'article' => [
-            'treeView' => ['name' => '文章', 'icon' => 'fa-pagelines', 'url' => '#', 'actionName' => 'Article'],
-            'treeViewMenu' => [
-                ['name' => '文章列表', 'icon' => 'fa-circle-o', 'url' => "Article/index", 'actionName' => "Article/index",'auth' =>[
+        'article' => array(
+            'treeView' => array('name' => '文章', 'icon' => 'fa-pagelines', 'url' => '#', 'actionName' => 'Article'),
+            'treeViewMenu' => array(
+                array('name' => '文章列表', 'icon' => 'fa-circle-o', 'url' => "Article/index", 'actionName' => "Article/index",'auth' =>array()
+                ),
+                array('name' => '新增文章', 'icon' => 'fa-circle-o', 'url' => "Article/create", 'actionName' => 'Article/create','auth' =>array(
                     ''
-                ]],
-                ['name' => '新增文章', 'icon' => 'fa-circle-o', 'url' => "Article/create", 'actionName' => 'Article/create','auth' =>[
+                ))
+        )
+        ),
+        'comment' => array(
+            'treeView' => array('name' => '评论', 'icon' => 'fa-pencil', 'url' => '#', 'actionName' => 'Comment'),
+            'treeViewMenu' => array(
+                array('name' => '评论列表', 'icon' => 'fa-circle-o', 'url' => "Comment/index", 'actionName' => 'Comment/index','auth' =>array(
                     ''
-                ]]
-            ]
-        ],
-        'comment' => [
-            'treeView' => ['name' => '评论', 'icon' => 'fa-pencil', 'url' => '#', 'actionName' => 'Comment'],
-            'treeViewMenu' => [
-                ['name' => '评论列表', 'icon' => 'fa-circle-o', 'url' => "Comment/index", 'actionName' => 'Comment/index','auth' =>[
+                ))
+            )
+        ),
+        'user' => array(
+            'treeView' => array('name' => '用户', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'User'),
+            'treeViewMenu' => array(
+                array('name' => '用户列表', 'icon' => 'fa-circle-o', 'url' => "User/index", 'actionName' => 'User/index','auth' =>array(
                     ''
-                ]]
-            ]
-        ],
-        'user' => [
-            'treeView' => ['name' => '用户', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'User'],
-            'treeViewMenu' => [
-                ['name' => '用户列表', 'icon' => 'fa-circle-o', 'url' => "User/index", 'actionName' => 'User/index','auth' =>[
+                )),
+                array('name' => '增加用户', 'icon' => 'fa-circle-o', 'url' => "User/showAdd", 'actionName' => 'User/showAdd','auth' =>array(
                     ''
-                ]],
-                ['name' => '增加用户', 'icon' => 'fa-circle-o', 'url' => "User/showAdd", 'actionName' => 'User/showAdd','auth' =>[
+                )),
+                array('name' => '管理组权限', 'icon' => 'fa-circle-o', 'url' => "Perm/showGroupsList", 'actionName' => 'Perm/showGroupsList','auth' =>array(
                     ''
-                ]],
-                ['name' => '管理组权限', 'icon' => 'fa-circle-o', 'url' => "Perm/showGroupsList", 'actionName' => 'Perm/showGroupsList','auth' =>[
-                    ''
-                ]],
-            ]
-        ],
+                )),
+            )
+        ),
     ),
 
 
