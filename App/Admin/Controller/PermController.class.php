@@ -65,7 +65,7 @@ class PermController extends BaseController {
         $data['custom_access'] = $customaccess;
         $user->where('id='.$id)->save($data);
 
-        $this->redirect('Perm/showPersonalPerm', array('id'=>$id), 0, '');
+        $this->success('保存成功');
     }
 
     public function showGroupsList()
@@ -113,7 +113,7 @@ class PermController extends BaseController {
             $adminGroup = new AdminGroup();
             $adminGroup->where(array('cp_group_id'=>array('in',$ids)))->delete();
         }
-        $this->redirect('Perm/showGroupsList', '', 0, '');
+        $this->success('保存成功');
     }
 
 
@@ -156,7 +156,7 @@ class PermController extends BaseController {
                 $adminAccess->add($data);
             }
         }
-        $this->redirect('Perm/showGroupPerm', array('id' => $id), 2, '保存成功...');
+        $this->success('保存成功');
     }
 
 }

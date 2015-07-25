@@ -19,7 +19,7 @@ class AuthController extends Controller {
             session('admin.admin',$data);  //设置session
             $this->redirect('Admin/index', '', 0, '...');
         }
-        $this->redirect('Auth/login', '', 2, '用户名或密码错误，请重新登录');
+        $this->error('用户名或密码错误，请重新登录');
 
     }
 
