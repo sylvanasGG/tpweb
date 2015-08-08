@@ -21,6 +21,7 @@ class ArticleController extends BaseController {
         $list = $article->order('updated_at desc')->limit($Page->firstRow.','.$Page->listRows)->select();
         $this->assign('articles',$list);// 赋值数据集
         $this->assign('page',$show);// 赋值分页输出
+        $this->assign('article_types',ArticleLib::$ARTICLE_TYPE);
         $this->display('index'); // 输出模板
     }
 
@@ -73,7 +74,7 @@ class ArticleController extends BaseController {
     public function edit($id)
     {
         $mod = new Article;
-    	$article = $mod->where('id='.$id)->find();
+    	$article = $mod->where('article_id='.$id)->find();
         $this->assign('article_types',ArticleLib::$ARTICLE_TYPE);
     	$this->assign('article',$article);
     	$this->display('edit');
@@ -103,13 +104,18 @@ class ArticleController extends BaseController {
     /**
 	*动作： 删除文章
 	**/
-    public function delete($id)
+    public function delete()
     {
     	$article = new Article;
     	$comments = new Comment;
+        $id = $_GET['id'];
     	$comments->where('article_id='.$id)->delete();
-    	$article->where('id='.$id)->delete();
-    	$this->success('删除成功');
+    	$article->where('article_id='.$id)->delete();
+        $data = array(
+            'ret'=>0,
+            'msg'=>'删除成功',
+        );
+        $this->ajaxReturn($data);
     }
     /**
     *动作： 后台展示一篇文章

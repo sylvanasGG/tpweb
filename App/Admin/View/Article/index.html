@@ -5,44 +5,140 @@
         margin-right: 10px;
     }
 </style>
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">文章管理</div>
+<section class="content-header">
+    <h1>
+        文章列表
+        <a href="{:U('Article/create')}" class="btn btn-primary btn-sm">文章添加</a>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 文章</a></li>
+        <li class="active">文章列表</li>
+    </ol>
+</section>
 
-                <div class="panel-body">
+<!-- Main content -->
+<section class="content">
 
-                    <a href="{:U('Article/create')}" class="btn btn-lg btn-primary">新增</a>
-
-                    <foreach name='articles' item='article'>
-                        <hr>
-                        <div class="page">
-                            <if condition="$article['article_type']">
-                                <p><span><b>文章类型：</b></span><span><?php echo \Common\Common\ArticleLib::$ARTICLE_TYPE[$article['article_type']]?></span></p>
-                            </if>
-                            <p><span><b>文章开头图片：</b></span><a href="{$article['article_photo']}" target="__blank">{$article['article_photo']}</a></p>
-                            <p><span><b>文章标题：</b></span><span>{$article['title']}</span></p>
-                            <p><span><b>发表时间：</b></span><span>{$article['updated_at']}</span></p>
-
-                            <label>文章内容：</label>
-                            <div class="content">
-                                <p>
-                                    <?php echo Fun::mixSub(strip_tags($article['content']),200)?>
-                                </p>
+    <div class="box">
+        <!--内容头部-->
+        <div class="box-header">
+            <form action="/article/index" method="get">
+                <table class="table">
+                    <colgroup>
+                        <col style="width: 300px" />
+                        <col style="width: 250px;" />
+                        <col style="width: 200px;" />
+                        <col style="width: 100px;" />
+                        <col />
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon">标题</span>
+                                <input type="text" class="form-control"  aria-describedby="basic-addon1" name="title" value="">
                             </div>
-                        </div>
-                        <a href="{:U('Article/edit',array('id'=>$article['id']))}" class="btn btn-success">编辑</a>
-
-                        <form action="{:U('Article/delete',array('id'=>$article['id']))}" method="POST" style="display: inline;">
-                            <button type="submit" class="btn btn-danger">删除</button>
-                        </form>
-                    </foreach>
-                    <div class="col-sm-4 col-sm-offset-8">
-                        <div class ="pagination pagination-lg pagelist" style="">{$page}</div>
-                    </div>
-                </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon" >作者</span>
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="author" value="">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon" >类型</span>
+                                <select class="form-control" name="article_type" id="article_type">
+                                    <option value="">--请选择--</option>
+                                    <foreach name='{article_types}' item='val' key='key'>
+                                        <option value="{$key}">{$val}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <button class="btn btn-primary" type="submit">搜索</button>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <!--内容主体-->
+        <div class="box-body" style="overflow-x: auto;">
+            <table class="table table-striped">
+                <tr class="row">
+                    <th class="col-lg-1">ID</th>
+                    <th class="col-lg-2">标题</th>
+                    <th class="col-lg-1">作者</th>
+                    <th class="col-lg-1">文章类型</th>
+                    <th class="col-lg-1">文章图片</th>
+                    <th class="col-lg-4">文章内容</th>
+                    <th class="col-lg-1">编辑</th>
+                    <th class="col-lg-1">删除</th>
+                </tr>
+                <foreach name='articles' item='article'>
+                <tr class="row">
+                    <td class="col-lg-1">
+                        {$article['article_id']}
+                    </td>
+                    <td class="col-lg-2">
+                        <span data-toggle="tooltip" data-original-title="{$article['title']}">{$article['title']}</span>
+                    </td>
+                    <td class="col-lg-1">
+                        {$article['author']}
+                    </td>
+                    <td class="col-lg-1">
+                        <?php echo \Common\Common\ArticleLib::$ARTICLE_TYPE[$article['article_type']]?>
+                    </td>
+                    <td class="col-lg-1">
+                        <a href="{$article['article_photo']}" target="_blank">图片</a>
+                    </td>
+                    <td class="col-lg-4">
+                        <a href="{:U('Home/Article/show',array('id'=>$article['article_id']))}" target="_blank"><?php echo Fun::mixSub(strip_tags($article['content']),30)?></a>
+                    </td>
+                    <td class="col-lg-1">
+                        <a href="{:U('Article/edit',array('id'=>$article['article_id']))}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
+                    </td>
+                    <td class="col-lg-1">
+                        <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{$article['article_id']}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
+                    </td>
+                </tr>
+                </foreach>
+            </table>
+        </div><!-- /.box-body -->
+        <!--内容尾部-->
+        <div class="box-footer clearfix">
+            <div class="pull-right">
+                {$page}
             </div>
         </div>
     </div>
-</div>
+
+</section><!-- /.content -->
+<script>
+    function del(e)
+    {
+        if(!confirm('确定要删除吗？'))
+        {
+            return false;
+        }
+        var obj = $(e);
+        var id = obj.attr("rel");
+        $.ajax({
+            url: "{:U('Article/delete')}",
+            type: "get",
+            data: {"id":id},
+            dataType: "json",
+            success: function( result ){
+                if ( result.ret == 0 ) {
+                    obj.parent().parent().remove();
+                    alert(result.msg);
+                }
+            }
+        });
+    }
+</script>

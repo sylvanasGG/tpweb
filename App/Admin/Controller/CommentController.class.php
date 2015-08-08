@@ -11,7 +11,7 @@ class CommentController extends BaseController {
     {
         $comments = new Comment;
         $count      = $comments->order('updated_at desc')->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $Page       = new \Think\Page($count,5);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $Page->setConfig('header','页');
         $Page->setConfig('prev','');
         $Page->setConfig('next','');
@@ -59,9 +59,10 @@ class CommentController extends BaseController {
 	**/
     public function delete()
     {
+
+        $comment = new Comment;
         $id = $_GET['id'];
-    	$comment = new Comment;
-    	if($comment->where('id='.$id)->delete())
+        if($comment->where('id='.$id)->delete())
         {
             $data = array(
                 'ret'=>0,
@@ -69,5 +70,6 @@ class CommentController extends BaseController {
             );
             $this->ajaxReturn($data);
         }
+
     }
 }

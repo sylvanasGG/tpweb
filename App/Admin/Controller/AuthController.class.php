@@ -27,7 +27,6 @@ class AuthController extends Controller {
     {
       session('admin.admin',null);
       $this->redirect('Auth/login', '', 0, '...');
-
     }
 
 }

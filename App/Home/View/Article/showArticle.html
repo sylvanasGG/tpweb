@@ -9,9 +9,12 @@
                         <time class="post-date" title="{$article['updated_at']}">{$article['updated_at']}</time>
                     </div>
                 </div>
-                <div class="featured-media">
-                    <a href="#"><img src="{$article['article_photo']}" alt="Laravel 5.1 LTS 版本正式发布"></a>
-                </div>
+                <if condition="$article['article_photo']">
+                    <div class="featured-media">
+                        <a href="#"><img src="{$article['article_photo']}" alt="{$article['title']}"></a>
+                    </div>
+                </if>
+
                 <div class="post-content">
                     <p>{$article['content']}</p>
                 </div>
@@ -30,75 +33,89 @@
             </article>
     </if>
 
-<div id="comments" style="margin-bottom: 100px;">
+    <div id="comments" style="margin-bottom: 100px;">
+        <div>
 
-        <div class="conmments" >
-                <foreach name='comments' item='comment'>
-                    <div class="one" style="border-top: solid 5px #49B544; padding: 0px 20px;background-color:#ffffff">
-                        <div class="nickname" data="{$comment['nickname']}">
-                            <if condition="$comment['website']">
-                                <a href="">
-                                    <h3>{$comment['nickname']}</h3>
-                                </a>
-                            <else />
-                                <h3>{$comment['nickname']}</h3>
-                            </if>
-                            <h6>{$comment['created_at']}</h6>
-                        </div>
-                        <div class="content">
-                            <p style="padding: 20px;">
-                                {$comment['content']}
-                            </p>
-                        </div>
-                        <div class="reply" style="text-align: right; padding: 5px;">
-                            <a href="#new" onclick="reply(this);">回复</a>
-                        </div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><strong>评论</strong></a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <div class="conmments" style="background-color:#ffffff;">
+                        <table class="table table-striped">
+                            <colgroup>
+                                <col  />
+                                <col style="width: 10%" />
+                            </colgroup>
+
+                            <tbody>
+                            <foreach name='comments' item='comment' key="key">
+                            <tr>
+                                <td >
+                                    <div class="nickname"><strong style="color: #3c8dbc">{$comment['nickname']}</strong>&nbsp;&nbsp;&nbsp;{$comment['created_at']}</div>
+                                </td>
+                                <td>
+                                    {$key+1}楼
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="word-break:break-all">{$comment['content']}</td>
+                                <td><a href="#new" onclick="reply(this);" data-name="{$comment['nickname']}" style="color: #3c8dbc">回复</a></td>
+                            </tr>
+                            </foreach>
+                            </tbody>
+                        </table>
+
                     </div>
-
-                </foreach>
+                </div>
             </div>
-            
-        <div id="new" style="border:2px solid gray;border-top: solid 5px #49B544;margin-top:20px;">
+
+        </div>
+
+        <div id="new" style="border-top: solid 5px #49B544;margin-top:20px;background-color: #ffffff;padding-bottom: 5px;padding-top: 5px;">
             <form action="{:U('Comment/create')}" method="POST" class="form-horizontal">
-                <input type="hidden" name="article_id" value="{$article['id']}">
+                <input type="hidden" name="article_id" value="{$article['article_id']}">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">用户名</label>
-                    <div class="col-sm-9">
-                    <input type="text" name="nickname" class="form-control" style="width: 300px;" required="required" placeholder="用户名">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称"  />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">邮箱地址</label>
-                    <div class="col-sm-9">
-                    <input type="email" name="email" class="form-control" style="width: 300px;" placeholder="邮箱地址">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="邮箱"  />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">个人主页</label>
-                    <div class="col-sm-9">
-                    <input type="text" name="website" class="form-control" style="width: 300px;" placeholder="个人主页">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <textarea name="content" id="newFormContent" class="form-control" rows="2" required="required" placeholder="评论"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">评论</label>
-                    <div class="col-sm-9">
-                    <textarea name="content" id="newFormContent" class="form-control" rows="2" required="required" placeholder="评论"></textarea>
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <button type="submit" class="btn btn-lg btn-success col-lg-12">发表</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-9">
-                      <button type="submit" class="btn btn-lg btn-success col-lg-12">Submit</button>
-                    </div>
-                  </div>
-                
+
             </form>
         </div>
 
+
+
+
         <script>
             function reply(a) {
-                var nickname = a.parentNode.parentNode.firstChild.nextSibling.getAttribute('data');
-                var textArea = document.getElementById('newFormContent');
-                textArea.innerHTML = '@'+nickname+' ';
+                var obj = $(a);
+                var nickname = obj.attr('data-name');
+                var teatArea = $("#newFormContent");
+                teatArea.val('@'+nickname+' ');
+            }
+
+            function submitRegister()
+            {
+
             }
         </script>
 

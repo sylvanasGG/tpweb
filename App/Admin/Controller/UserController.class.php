@@ -13,7 +13,7 @@ class UserController extends BaseController {
 
     	$users = new User;
     	$count      = $users->order('created_at desc')->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $Page       = new \Think\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $Page->setConfig('header','页');
         $Page->setConfig('prev','');
         $Page->setConfig('next','');

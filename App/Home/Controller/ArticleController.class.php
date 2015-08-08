@@ -7,7 +7,7 @@ class ArticleController extends Controller {
     public function show($id)
     {
         $articles = new Article;
-        $article = $articles->where('id='.$id)->find();
+        $article = $articles->where('article_id='.$id)->find();
         $comments = $articles->relation(true)->find($id);
 
         $this->assign('article',$article);

@@ -5,60 +5,104 @@
             margin-right: 10px; 
         }
     </style>
-<div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">管理评论</div>
+<section class="content-header">
+    <h1>
+        评论列表
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 评论</a></li>
+        <li class="active">评论列表</li>
+    </ol>
+</section>
 
-                    <div class="panel-body">
+<!-- Main content -->
+<section class="content">
 
-                        <table class="table table-striped">
-                            <tr class="row">
-                                <th class="col-lg-4">Content</th>
-                                <th class="col-lg-2">User</th>
-                                <th class="col-lg-4">Article</th>
-                                <th class="col-lg-1">编辑</th>
-                                <th class="col-lg-1">删除</th>
-                            </tr>
-                            <foreach name='comments' item='comment'>
-                                <tr class="row">
-                                    <td class="col-lg-6">
-                                        {$comment['content']}
-                                    </td>
-                                    <td class="col-lg-2">
-                                        <if condition="$comment['website']">
-                                            <a href="{$comment['website']}">
-                                                <h4>{$comment['nickname']}</h4>
-                                            </a>
-                                        <else />
-                                            <h3>{$comment['nickname']}</h3>
-                                        </if>
-                                        {$comment['email']}
-                                    </td>
-                                    <td class="col-lg-4">
-                                        <a href="{:U('Article/show',array('id'=>$comment['article_id']))}" >
-                                            <?php $article = new \Home\Model\ArticleModel();$mod=$article->where('id='.$comment['article_id'])->find();echo $mod['title']?>
-                                        </a>
-                                    </td>
-                                    <td class="col-lg-1">
-                                        <a href="{:U('Comment/edit',array('id'=>$comment['id']))}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
-                                    </td>
-                                    <td class="col-lg-1">
-                                        <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{$comment['id']}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
-                                    </td>
-                                </tr>
-                            </foreach>
-                        </table>
-                        <div class="col-sm-4 col-sm-offset-8">
-                            <div class ="pagination pagination-lg pagelist">{$page}</div>
-                        </div>
-
-                    </div>
-                </div>
+    <div class="box">
+        <!--内容头部-->
+        <div class="box-header">
+            <form action="/comment/index" method="get">
+                <table class="table">
+                    <colgroup>
+                        <col style="width: 300px;" />
+                        <col style="width: 250px;" />
+                        <col style="width: 250px;" />
+                        <col style="width: 100px"/>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon">评论内容</span>
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="content" value="">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon">所属文章</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon">评论时间</span>
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" >
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <button class="btn btn-primary" type="submit">搜索</button>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <!--内容主体-->
+        <div class="box-body" style="overflow-x: auto;">
+            <table class="table table-striped">
+                <tr class="row">
+                    <th class="col-lg-4">内容</th>
+                    <th class="col-lg-1">用户</th>
+                    <th class="col-lg-3">评论文章</th>
+                    <th class="col-lg-2">邮箱</th>
+                    <th class="col-lg-1">编辑</th>
+                    <th class="col-lg-1">删除</th>
+                </tr>
+                <foreach name='comments' item='comment'>
+                <tr class="row">
+                    <td class="col-lg-1">
+                        <span data-toggle="tooltip" data-original-title="{$comment['content']}"><?php echo Fun::mixSub(strip_tags($comment['content']),20)?></span>
+                    </td>
+                    <td class="col-lg-1">
+                        {$comment['nickname']}
+                    </td>
+                    <td class="col-lg-3">
+                        <a href="{:U('Home/Article/show',array('id'=>$comment['article_id']))}" target="_blank"><?php $article = new \Home\Model\ArticleModel();$mod=$article->where('article_id='.$comment['article_id'])->find();echo Fun::mixSub(strip_tags($mod['title']),20)?></a>
+                    </td>
+                    <td class="col-lg-2">
+                        {$comment['email']}
+                    </td>
+                    <td class="col-lg-1">
+                        <a href="{:U('Comment/edit',array('id'=>$comment['id']))}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
+                    </td>
+                    <td class="col-lg-1">
+                        <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{$comment['id']}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
+                    </td>
+                </tr>
+                </foreach>
+            </table>
+        </div><!-- /.box-body -->
+        <!--内容尾部-->
+        <div class="box-footer clearfix">
+            <div class="pull-right">
+                {$page}
             </div>
         </div>
     </div>
+
+</section><!-- /.content -->
 <script>
     function del(e)
     {
@@ -70,7 +114,7 @@
         var id = obj.attr("rel");
         $.ajax({
             url: "{:U('Comment/delete')}",
-            type: "GET",
+            type: "get",
             data: {"id":id},
             dataType: "json",
             success: function( result ){

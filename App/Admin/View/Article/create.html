@@ -1,45 +1,61 @@
 
     <include file='layouts/ueditor' />
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">新增文章</div>
+    <section class="content-header">
+        <h1>
+            文章添加
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{:U('Article/index')}"><i class="fa fa-dashboard"></i> 文章</a></li>
+            <li class="active">文章添加</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
 
-                    <div class="panel-body">
-                        <form action="{:U('Article/store')}" method="POST" id="createArticleForm" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label>文章类型</label>
-                                <select class="form-control" name="article_type" id="article_type">
-                                    <option value="">--请选择--</option>
-                                    <foreach name='{article_types}' item='val' key='key'>
-                                    <option value="{$key}">{$val}</option>
-                                    </foreach>
-                                </select>
+        <div class="box">
+            <div class="box-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <form action="{:U('Article/store')}" method="POST" id="createArticleForm" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label>文章类型</label>
+                                            <select class="form-control" name="article_type" id="article_type">
+                                                <option value="">--请选择--</option>
+                                                <foreach name='{article_types}' item='val' key='key'>
+                                                    <option value="{$key}">{$val}</option>
+                                                </foreach>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>文章开头图片</label>
+                                            <input type="file" name="article_photo"  />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>文章标题</label>
+                                            <input type="text" name="title" class="form-control" required="required">
+                                        </div>
+                                        <div class="form-group" style="min-height: 300px;overflow-y: auto">
+                                            <label>文章内容</label>
+                                            <script id="editor" name="content" type="text/plain"></script>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-lg btn-info" type="button" id="createArticleBtn">新增 Page</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>文章开头图片</label>
-                                <input type="file" name="article_photo"  />
-                            </div>
-                            <div class="form-group">
-                                <label>文章标题</label>
-                                <input type="text" name="title" class="form-control" required="required">
-                            </div>
-                            <div class="form-group" style="min-height: 300px;overflow-y: auto">
-                                <label>文章内容</label>
-                                <script id="editor" name="content" type="text/plain"></script>
-                            </div>
-                            <div>
-                                <button class="btn btn-lg btn-info" type="button" id="createArticleBtn">新增 Page</button>
-                            </div>
-                        </form>
-
+                        </div>
                     </div>
-
                 </div>
             </div>
-        </div>
-    </div>
+
+
+            </div>
+        </section>
+
     <script>
     $("#createArticleBtn").click(function(e)
     {

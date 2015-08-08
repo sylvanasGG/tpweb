@@ -8,7 +8,7 @@
     </style>
     <if condition="isset($articles)">
     <foreach name="articles" item="val">
-        <article id="{$val['id']}" class="post tag-laravel tag-laravel-5-1 tag-xin-ban-ben-fa-bu" style="margin-bottom:20px;">
+        <article id="{$val['article_id']}" class="post tag-laravel tag-laravel-5-1 tag-xin-ban-ben-fa-bu" style="margin-bottom:20px;">
 
         <div class="post-head">
             <h1 class="post-title"><a href="">{$val['title']}</a></h1>
@@ -24,7 +24,7 @@
             <p><?php echo Fun::mixSub(strip_tags($val['content']),200)?></p>
         </div>
         <div class="post-permalink">
-            <a href="{:U('Article/show',array('id'=>$val['id']))}" class="btn btn-default">阅读全文</a>
+            <a href="{:U('Article/show',array('id'=>$val['article_id']))}" class="btn btn-default">阅读全文</a>
         </div>
 
         <footer class="post-footer clearfix">
