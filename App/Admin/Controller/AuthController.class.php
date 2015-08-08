@@ -11,9 +11,9 @@ class AuthController extends Controller {
 
     public function getLogin()
     {
-        $name = $_POST['name'];
+        $name = $_POST['username'];
         $user = new User();
-        $data = $user->where('name="'.$name.'"')->find();
+        $data = $user->where('username="'.$name.'"')->find();
         if($data && $data['password'] == md5($_POST['password']))
         {
             session('admin.admin',$data);  //设置session
