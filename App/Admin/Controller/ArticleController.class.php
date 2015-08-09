@@ -25,10 +25,10 @@ class ArticleController extends BaseController {
         $this->display('index'); // 输出模板
     }
 
-	/**
-	*视图： 新增文章
-	**/
-	public function create()
+    /**
+     *视图： 新增文章
+     **/
+    public function create()
     {
         $this->assign('article_types',ArticleLib::$ARTICLE_TYPE);
         $this->display('create');
@@ -49,68 +49,70 @@ class ArticleController extends BaseController {
         }
     }
     /**
-	*动作： 新增文章
-	**/
+     *动作： 新增文章
+     **/
     public function store()
     {
         if($_FILES['article_photo']['name'])
         {
-          $res = $this->upload($_FILES['article_photo']);  
+            $res = $this->upload($_FILES['article_photo']);
         }
         $article = new Article;
-    	$data = $_POST;
+        $data = $_POST;
+        $user = session('admin.admin');
+        $data['author'] = $user['username'];
         $data['article_photo'] =$res? __ROOT__.'/Uploads/'.$res:__ROOT__.'/Public/img/111.jpg';
         $data['created_at'] = date("Y-m-d H:i:s",time());
         $data['updated_at'] = date("Y-m-d H:i:s",time());
-    	if($article->add($data))
-    	{
-        	$this->success('发表成功');
+        if($article->add($data))
+        {
+            $this->success('发表成功');
         }
         $this->error('发表失败');
     }
     /**
-	*视图： 编辑文章
-	**/
+     *视图： 编辑文章
+     **/
     public function edit($id)
     {
         $mod = new Article;
-    	$article = $mod->where('article_id='.$id)->find();
+        $article = $mod->where('article_id='.$id)->find();
         $this->assign('article_types',ArticleLib::$ARTICLE_TYPE);
-    	$this->assign('article',$article);
-    	$this->display('edit');
+        $this->assign('article',$article);
+        $this->display('edit');
     }
     /**
-	*动作： 编辑文章
-	**/
+     *动作： 编辑文章
+     **/
     public function update($id)
     {
         if($_FILES['article_photo']['name'])
         {
-          $res = $this->upload($_FILES['article_photo']);  
+            $res = $this->upload($_FILES['article_photo']);
         }
         $article = new Article;
-    	if($res)$article->article_photo = __ROOT__.'/Uploads/'.$res;
-    	$article->article_type = $_POST['article_type'];
-    	$article->title = $_POST['title'];
-    	$article->content = $_POST['content'];
-    	$article->updated_at = date('Y-m-d H:i:s',time());
-    	if($article->where('id='.$id)->save())
-    	{
-    		//$this->success('编辑成功','/Index/index',1);
+        if($res)$article->article_photo = __ROOT__.'/Uploads/'.$res;
+        $article->article_type = $_POST['article_type'];
+        $article->title = $_POST['title'];
+        $article->content = $_POST['content'];
+        $article->updated_at = date('Y-m-d H:i:s',time());
+        if($article->where('id='.$id)->save())
+        {
+            //$this->success('编辑成功','/Index/index',1);
             $this->redirect('Article/edit', array('id' => $id), 2, '编辑成功，页面跳转中...');
-    	}
-    	$this->error('编辑失败');
+        }
+        $this->error('编辑失败');
     }
     /**
-	*动作： 删除文章
-	**/
+     *动作： 删除文章
+     **/
     public function delete()
     {
-    	$article = new Article;
-    	$comments = new Comment;
+        $article = new Article;
+        $comments = new Comment;
         $id = $_GET['id'];
-    	$comments->where('article_id='.$id)->delete();
-    	$article->where('article_id='.$id)->delete();
+        $comments->where('article_id='.$id)->delete();
+        $article->where('article_id='.$id)->delete();
         $data = array(
             'ret'=>0,
             'msg'=>'删除成功',
@@ -118,8 +120,8 @@ class ArticleController extends BaseController {
         $this->ajaxReturn($data);
     }
     /**
-    *动作： 后台展示一篇文章
-    **/
+     *动作： 后台展示一篇文章
+     **/
     public function show($id)
     {
         $articles = new Article;
