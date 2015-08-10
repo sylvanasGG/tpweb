@@ -45,6 +45,16 @@ return array(
                 array('name' => '管理组权限', 'icon' => 'fa-circle-o', 'url' => "Perm/showGroupsList", 'actionName' => 'Perm/showGroupsList','auth' =>array(
                     ''
                 )),
+
+            )
+        ),
+        'visitor' => array(
+            'treeView' => array('name' => '访问者', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'Visitor'),
+            'treeViewMenu' => array(
+                array('name' => '访问者列表', 'icon' => 'fa-circle-o', 'url' => "Visitor/index", 'actionName' => 'Visitor/index','auth' =>array(
+                    ''
+                )),
+
             )
         ),
     ),
