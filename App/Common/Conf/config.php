@@ -28,7 +28,17 @@ return array(
     'HTML_CACHE_ON' => false, // 默认关闭静态缓存
     'DB_FIELD_CACHE'=>false,
     'HTML_CACHE_ON'=>false,
-    "LOAD_EXT_FILE"=>"Fun,ArticleLib",
+    "LOAD_EXT_FILE"=>"Fun,ArticleLib,SendMail",
     //设置系统管理员
-    'SYSTEM_ADMIN' => 1
+    'SYSTEM_ADMIN' => 1,
+
+    // 配置邮件发送服务器
+    'MAIL_HOST' =>'smtp.qq.com',//smtp服务器的名称
+    'MAIL_SMTPAUTH' =>TRUE, //启用smtp认证
+    'MAIL_USERNAME' =>'406874221@qq.com',//你的邮箱名
+    'MAIL_FROM' =>'406874221@qq.com',//发件人地址
+    'MAIL_FROMNAME'=>'first_blood',//发件人姓名
+    'MAIL_PASSWORD' =>'zz123456',//邮箱密码
+    'MAIL_CHARSET' =>'utf-8',//设置邮件编码
+    'MAIL_ISHTML' =>TRUE, // 是否HTML格式邮件
 );
