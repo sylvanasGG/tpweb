@@ -24,8 +24,12 @@ class VisitorController extends BaseController {
         $show       = $Page->show();// 分页显示输出
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         $list = $visitors->order('created_at desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        //访问总次数
+        $sum = M('sums');
+        $total = $sum->where('id=1')->getField('visitor_sum');
         $this->assign('visitors',$list);// 赋值数据集
         $this->assign('page',$show);// 赋值分页输出
+        $this->assign('sum',$total);
         $this->display('index'); // 输出模板
     }
 
