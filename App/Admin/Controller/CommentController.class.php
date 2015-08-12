@@ -49,8 +49,8 @@ class CommentController extends BaseController {
     	$comment->updated_at = date('Y-m-d H:i:s',time());
     	if($comment->where('id='.$id)->save())
     	{
-    		//$this->success('编辑成功','/Index/index',1);
-            $this->redirect('Comment/edit', array('id' => $id), 2, '编辑成功，页面跳转中...');
+    		//$this->success('编辑成功','Comment/index',1);
+            $this->redirect('Comment/index', array('id' => $id), 1, '编辑成功');
     	}
     	$this->error('编辑失败');
     }

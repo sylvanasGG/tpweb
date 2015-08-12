@@ -99,7 +99,7 @@ class ArticleController extends BaseController {
         if($article->where('id='.$id)->save())
         {
             //$this->success('编辑成功','/Index/index',1);
-            $this->redirect('Article/edit', array('id' => $id), 2, '编辑成功，页面跳转中...');
+            $this->redirect('Article/index', array('id' => $id), 1, '编辑成功');
         }
         $this->error('编辑失败');
     }

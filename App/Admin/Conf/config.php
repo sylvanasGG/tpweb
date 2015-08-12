@@ -34,12 +34,12 @@ return array(
             )
         ),
         'user' => array(
-            'treeView' => array('name' => '用户', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'User'),
+            'treeView' => array('name' => '管理员', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'User'),
             'treeViewMenu' => array(
-                array('name' => '用户列表', 'icon' => 'fa-circle-o', 'url' => "User/index", 'actionName' => 'User/index','auth' =>array(
+                array('name' => '管理员列表', 'icon' => 'fa-circle-o', 'url' => "User/index", 'actionName' => 'User/index','auth' =>array(
                     ''
                 )),
-                array('name' => '增加用户', 'icon' => 'fa-circle-o', 'url' => "User/showAdd", 'actionName' => 'User/showAdd','auth' =>array(
+                array('name' => '增加管理员', 'icon' => 'fa-circle-o', 'url' => "User/showAdd", 'actionName' => 'User/showAdd','auth' =>array(
                     ''
                 )),
                 array('name' => '管理组权限', 'icon' => 'fa-circle-o', 'url' => "Perm/showGroupsList", 'actionName' => 'Perm/showGroupsList','auth' =>array(
@@ -49,9 +49,12 @@ return array(
             )
         ),
         'visitor' => array(
-            'treeView' => array('name' => '访问者', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'Visitor'),
+            'treeView' => array('name' => '用户', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'Visitor'),
             'treeViewMenu' => array(
                 array('name' => '访问者列表', 'icon' => 'fa-circle-o', 'url' => "Visitor/index", 'actionName' => 'Visitor/index','auth' =>array(
+                    ''
+                )),
+                array('name' => '注册用户', 'icon' => 'fa-circle-o', 'url' => "Visitor/index", 'actionName' => 'Visitor/index','auth' =>array(
                     ''
                 )),
 

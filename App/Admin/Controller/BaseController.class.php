@@ -14,7 +14,8 @@ class BaseController extends Controller {
         //验证是否admin登录
         if(!session('admin.admin'))
         {
-            $this->redirect('Auth/login','', 2, '请先登录...');
+            $this->redirect('Auth/login','', 0, '');
+            //$this->error('请先登录...','Auth/login',2);
         }
         $this->_menus = C("LAYOUT_MENU");
         $this->allowList();
