@@ -15,6 +15,14 @@ return array(
     //'DEFAULT_THEME'    =>    'admin'
 
     'LAYOUT_MENU'=>array(
+        ''=>array(
+            'treeView' => array('name' => '仪表盘', 'icon' => 'fa-dashboard', 'url' => '#', 'actionName' => 'Admin'),
+            'treeViewMenu' => array(
+                array('name' => '首页', 'icon' => 'fa-circle-o', 'url' => "Admin/index", 'actionName' => "Admin/index",'auth' =>array()
+                ),
+
+            )
+        ),
         'article' => array(
             'treeView' => array('name' => '文章', 'icon' => 'fa-pagelines', 'url' => '#', 'actionName' => 'Article'),
             'treeViewMenu' => array(
@@ -49,7 +57,7 @@ return array(
             )
         ),
         'visitor' => array(
-            'treeView' => array('name' => '用户', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'Visitor'),
+            'treeView' => array('name' => '用户', 'icon' => 'fa-comments', 'url' => '#', 'actionName' => 'Visitor'),
             'treeViewMenu' => array(
                 array('name' => '访问者列表', 'icon' => 'fa-circle-o', 'url' => "Visitor/index", 'actionName' => 'Visitor/index','auth' =>array(
                     ''
