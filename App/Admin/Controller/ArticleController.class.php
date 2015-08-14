@@ -68,7 +68,7 @@ class ArticleController extends BaseController {
         {
             session('admin.success_msg','添加成功');
             //$this->success('评论成功');
-            $this->redirect('Article/create','', 0, '');
+            $this->redirect('Article/index','', 0, '');
             //$this->success('发表成功');
         }
         $this->error('发表失败');
@@ -136,12 +136,5 @@ class ArticleController extends BaseController {
         $this->display('show');
     }
 
-       public function unsetSession()
-    {
-        session('admin.success_msg',null);
-        $data = array(
-            'ret'=>0,
-        );
-        $this->ajaxReturn($data);
-    }
+    
 }

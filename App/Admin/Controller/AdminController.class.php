@@ -20,4 +20,13 @@ class AdminController extends BaseController {
         $data['info'] = $username;
         $this->ajaxReturn($data);
     }
+
+    public function unsetSession()
+    {
+        session('admin.success_msg',null);
+        $data = array(
+            'ret'=>0,
+        );
+        $this->ajaxReturn($data);
+    }
 }

@@ -13,7 +13,7 @@ class UserController extends BaseController {
 
     	$users = new User;
     	$count      = $users->order('created_at desc')->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $Page       = new \Think\Page($count,5);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $Page->setConfig('header','页');
         $Page->setConfig('prev','');
         $Page->setConfig('next','');
@@ -41,7 +41,7 @@ class UserController extends BaseController {
     public function postAdd()
     {
         $user = new User;
-        $data['name'] =$_POST['name'];
+        $data['username'] =$_POST['username'];
         $data['password'] =md5($_POST['password']);
         $data['email'] = $_POST['email'];
         $data['cp_group_id'] = $_POST['cp_group_id'];
@@ -49,7 +49,10 @@ class UserController extends BaseController {
         $data['updated_at'] = date("Y-m-d H:i:s",time());
         if($user->add($data))
         {
-            $this->success('添加成功');
+            session('admin.success_msg','添加成功');
+            //$this->success('评论成功');
+            $this->redirect('User/index','', 0, '');
+            //$this->success('添加成功');
         }
         $this->error('添加失败');
     }

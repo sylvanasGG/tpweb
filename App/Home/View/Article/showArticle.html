@@ -160,21 +160,22 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="login_password" class="col-sm-2 control-label">Password</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="password" class="form-control" id="register_password" name="password" placeholder="Password"  minlength="6" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <label for="register_email" class="col-sm-2 control-label">邮箱</label>
                                                         <div class="col-sm-10">
                                                             <input type="email" class="form-control" name="email" id="register_email"  placeholder="123@qq.com" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="register_phone" class="col-sm-2 control-label">手机号</label>
+                                                        <label for="login_password" class="col-sm-2 control-label">密码</label>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" name="phone" id="register_phone"  placeholder="138...">
+                                                            <input type="password" class="form-control" id="register_password" name="password" placeholder="Password"  minlength="6" required>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <label for="login_password" class="col-sm-2 control-label">再次输入</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="password" class="form-control" id="register_repassword" name="repassword" placeholder=""  minlength="6" required>
                                                         </div>
                                                     </div>
 
@@ -206,6 +207,11 @@
         var nickname = obj.attr('data-name');
         var teatArea = $("#newFormContent");
         teatArea.val('@'+nickname+' ');
+    }
+
+    function submitRegister()
+    {
+
     }
 
     function unsetSession()

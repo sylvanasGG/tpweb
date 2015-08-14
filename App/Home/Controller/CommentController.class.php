@@ -37,4 +37,6 @@ class CommentController extends Controller {
         );
         $this->ajaxReturn($data);
     }
+
+    
 }

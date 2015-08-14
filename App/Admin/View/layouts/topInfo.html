@@ -1,3 +1,4 @@
+<div style="position: fixed;z-index: 9999;top: 0;left:0;width: 100%;">
 <if condition="session('admin.error_msg')">
     <div class="alert alert-danger" style="margin-bottom: 0;">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -7,6 +8,26 @@
 <if condition="session('admin.success_msg')">
     <div class="alert alert-success" style="margin-bottom: 0;" id="success_msg">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <?php echo session('admin.success_msg'); ?>
+            <div style="position:relative;margin: 0 auto"><?php echo session('admin.success_msg'); ?></div>
     </div>
 </if>
+</div>
+<script>
+	function unsetSession()
+    {
+        $.ajax({
+            url: "{:U('Admin/unsetSession')}",
+            type: "get",
+            data: '',
+            dataType: "json",
+            success: function( result ){
+                if ( result.ret == 0 ) {
+                    $("#success_msg").hide();
+                }
+            }
+        });
+    }
+    $(function(){
+       setTimeout(unsetSession,4000);
+    })
+</script>
