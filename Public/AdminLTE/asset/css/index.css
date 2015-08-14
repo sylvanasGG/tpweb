@@ -900,3 +900,5 @@ pre {
     height: 30px;
     line-height: 30px;
 }
+.alert-success{border-color:#008d4c;background-color:#00a65a !important;color:#fff !important}
+.alert-danger,.alert-error{border-color:#d73925;background-color:#dd4b39 !important;color:#fff !important}

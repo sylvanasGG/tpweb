@@ -1,0 +1,12 @@
+<if condition="session('home.error_msg')">
+    <div class="alert alert-warning" style="margin-bottom: 0;" id="home_error_msg">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo session('home.error_msg'); ?>
+    </div>
+</if>
+<if condition="session('home.success_msg')">
+    <div class="alert alert-success" style="margin-bottom: 0;" id="home_success_msg">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <?php echo session('home.success_msg'); ?>
+    </div>
+</if>

@@ -33,5 +33,4 @@ class ArticleController extends Controller {
         $this->display('Index/index'); // 输出模板
     }
 
-
 }

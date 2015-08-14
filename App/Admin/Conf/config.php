@@ -71,7 +71,7 @@ return array(
         'example' => array(
             'treeView' => array('name' => '示例', 'icon' => 'fa-folder', 'url' => '#', 'actionName' => 'Example'),
             'treeViewMenu' => array(
-                array('name' => '表格', 'icon' => 'fa-circle-o', 'url' => "Example/table", 'actionName' => 'Visitor/index','auth' =>array(
+                array('name' => '表格', 'icon' => 'fa-circle-o', 'url' => "Example/index", 'actionName' => 'Example/index','auth' =>array(
                     ''
                 )),
                 

@@ -66,7 +66,10 @@ class ArticleController extends BaseController {
         $data['updated_at'] = date("Y-m-d H:i:s",time());
         if($article->add($data))
         {
-            $this->success('发表成功');
+            session('admin.success_msg','添加成功');
+            //$this->success('评论成功');
+            $this->redirect('Article/create','', 0, '');
+            //$this->success('发表成功');
         }
         $this->error('发表失败');
     }
@@ -131,5 +134,14 @@ class ArticleController extends BaseController {
         $this->assign('article',$article);
         $this->assign('comments',$comments['comment']);
         $this->display('show');
+    }
+
+       public function unsetSession()
+    {
+        session('admin.success_msg',null);
+        $data = array(
+            'ret'=>0,
+        );
+        $this->ajaxReturn($data);
     }
 }

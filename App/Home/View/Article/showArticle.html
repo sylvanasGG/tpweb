@@ -76,6 +76,7 @@
         </div>
 
         <div id="new" style="border-top: solid 5px #49B544;margin-top:20px;background-color: #ffffff;padding-bottom: 5px;padding-top: 5px;">
+        
             <form action="{:U('Comment/create')}" method="POST" class="form-horizontal">
                 <input type="hidden" name="article_id" value="{$article['article_id']}">
                 <div class="form-group">
@@ -199,19 +200,32 @@
 
 
 
-        <script>
-            function reply(a) {
-                var obj = $(a);
-                var nickname = obj.attr('data-name');
-                var teatArea = $("#newFormContent");
-                teatArea.val('@'+nickname+' ');
-            }
+<script>
+    function reply(a) {
+        var obj = $(a);
+        var nickname = obj.attr('data-name');
+        var teatArea = $("#newFormContent");
+        teatArea.val('@'+nickname+' ');
+    }
 
-            function submitRegister()
-            {
-
+    function unsetSession()
+    {
+        $.ajax({
+            url: "{:U('Comment/unsetSession')}",
+            type: "get",
+            data: '',
+            dataType: "json",
+            success: function( result ){
+                if ( result.ret == 0 ) {
+                    $("#home_success_msg").hide();
+                }
             }
-        </script>
+        });
+    }
+    $(function(){
+    setTimeout(unsetSession,2000); 
+    })
+</script>
 
 
     </div>

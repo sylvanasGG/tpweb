@@ -18,11 +18,23 @@ class CommentController extends Controller {
             $msg = '文章：['.$article['title'].'] 下有新的评论：'.$_POST['content'];
             //评论成功后给管理员发邮件
            // sendMail('77849093@qq.com','有人发表评论',$msg);
-            $this->success('评论成功');
+            
+             session('home.success_msg','评论成功');
+            //$this->success('评论成功');
+            $this->redirect('Article/show',array('id'=>$_POST['article_id']), 0, '');
         }else
         {
         	$this->error('评论失败');
         }
         
+    }
+
+    public function unsetSession()
+    {
+        session('home.success_msg',null);
+        $data = array(
+            'ret'=>0,
+        );
+        $this->ajaxReturn($data);
     }
 }
