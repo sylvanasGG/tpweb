@@ -86,7 +86,7 @@
                         {$article['article_id']}
                     </td>
                     <td class="col-lg-2">
-                        <span data-toggle="tooltip" data-original-title="{$article['title']}">{$article['title']}</span>
+                        <span data-toggle="tooltip" data-original-title="{$article['title']}"><?php echo Fun::mixSub(strip_tags($article['title']),10)?></span>
                     </td>
                     <td class="col-lg-1">
                         {$article['author']}

@@ -1,5 +1,4 @@
 
-    <include file='layouts/ueditor' />
     <if condition="isset($article)">
             <article id="{$article['id']}" class="post tag-laravel tag-laravel-5-1 tag-xin-ban-ben-fa-bu">
 
@@ -91,8 +90,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-10">
-                        <!-- <textarea name="content" id="newFormContent" class="form-control" rows="2" required="required" placeholder="评论"></textarea> -->
-                        <script id="editor" name="content" type="text/plain"></script>
+                        <textarea name="content" id="newFormContent" class="form-control" rows="2" required="required" placeholder="评论"></textarea>
+                        <!--<script id="editor" name="content" type="text/plain"></script>-->
                     </div>
                 </div>
                 <div class="form-group">
@@ -204,7 +203,7 @@
             function reply(a) {
                 var obj = $(a);
                 var nickname = obj.attr('data-name');
-                var teatArea = $("#editor");
+                var teatArea = $("#newFormContent");
                 teatArea.val('@'+nickname+' ');
             }
 

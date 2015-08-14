@@ -17,7 +17,7 @@ class CommentController extends Controller {
             $article = $mod->where('article_id='.$_POST['article_id'])->find();
             $msg = '文章：['.$article['title'].'] 下有新的评论：'.$_POST['content'];
             //评论成功后给管理员发邮件
-            sendMail('77849093@qq.com','有人发表评论',$msg);
+           // sendMail('77849093@qq.com','有人发表评论',$msg);
             $this->success('评论成功');
         }else
         {
