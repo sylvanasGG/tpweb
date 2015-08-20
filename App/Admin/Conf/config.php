@@ -62,7 +62,7 @@ return array(
                 array('name' => '访问者列表', 'icon' => 'fa-circle-o', 'url' => "Visitor/index", 'actionName' => 'Visitor/index','auth' =>array(
                     ''
                 )),
-                array('name' => '注册用户', 'icon' => 'fa-circle-o', 'url' => "Visitor/index", 'actionName' => 'Visitor/index','auth' =>array(
+                array('name' => '注册用户', 'icon' => 'fa-circle-o', 'url' => "Visitor/create", 'actionName' => 'Visitor/create','auth' =>array(
                     ''
                 )),
 
@@ -71,7 +71,7 @@ return array(
         'example' => array(
             'treeView' => array('name' => '示例', 'icon' => 'fa-folder', 'url' => '#', 'actionName' => 'Example'),
             'treeViewMenu' => array(
-                array('name' => '表格', 'icon' => 'fa-circle-o', 'url' => "Example/index", 'actionName' => 'Example/index','auth' =>array(
+                array('name' => '联系记录', 'icon' => 'fa-circle-o', 'url' => "Example/contact", 'actionName' => 'Example/contact','auth' =>array(
                     ''
                 )),
                 

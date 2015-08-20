@@ -9,10 +9,12 @@ class ExampleController extends BaseController {
     /**
 	* 视图：用户列表
     */
-    public function index(){
+    public function contact(){
 
-    	
-        $this->display('index'); // 输出模板
+        $contact = M('contacts');
+        $contacts = $contact->order('updated_at asc')->select();
+        $this->assign('contacts',$contacts);
+        $this->display(); // 输出模板
     }
 
   
