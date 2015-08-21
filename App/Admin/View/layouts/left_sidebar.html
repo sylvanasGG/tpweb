@@ -1,11 +1,25 @@
 <foreach name='menus' item='menu'>
-<li class="treeview">
+	<?php
+        $active = '';
+        if($menu['treeView']['actionName']== $_actionName)
+        {
+            $active = 'active';
+        }
+    ?>
+<li class="treeview {$active}" >
     <a href="#">
         <i class="fa {$menu['treeView']['icon']}"></i> <span>{$menu['treeView']['name']}</span> <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
         <foreach name="menu['treeViewMenu']" item='treeViewMenu'>
-        <li><a href="{:U($treeViewMenu['url'])}"><i class="fa {$treeViewMenu['icon']}"></i> {$treeViewMenu['name']}</a></li>
+        	<?php
+        		$selected = '';
+        		if($treeViewMenu['actionName'] == $_controllerFun)
+        		{
+        			$selected = 'active';
+        		}
+        	?>
+        <li class="{$selected}"><a href="{:U($treeViewMenu['url'])}"><i class="fa {$treeViewMenu['icon']}"></i> {$treeViewMenu['name']}</a></li>
         </foreach>
     </ul>
 </li>

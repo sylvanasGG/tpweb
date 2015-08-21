@@ -1,7 +1,7 @@
 <h1>管理权限 <span style="color: #336699"><strong>{$user['username']}</strong></span></h1>
 
 <div class="box">
-    <form action="{:U('Perm/postPersonalPerm',array('id'=>$user['id']))}" method="post">
+    <form action="{:U('User/postPersonalPerm',array('id'=>$user['id']))}" method="post">
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-xs-4">
@@ -84,7 +84,7 @@
         $("#_cp_group_id_new").change( function() {
             var cp_group_id = $(this).find("option:selected").val();
             var id = "{$user['id']}";
-            var url = '__ROOT__'+'/index.php/Admin/Perm/showPersonalPerm/id/'+id+'.html?cp_group_id='+cp_group_id;
+            var url = '__ROOT__'+'/index.php/Admin/User/showPersonalPerm/id/'+id+'.html?cp_group_id='+cp_group_id;
             location.href = url;
         });
     });

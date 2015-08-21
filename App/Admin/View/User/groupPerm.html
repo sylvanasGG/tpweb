@@ -17,7 +17,7 @@
             </div>
         </div>
     </div><!-- /.box-header -->
-    <form action="{:U('Perm/postGroupPerm',array('id'=>$id))}" method="post">
+    <form action="{:U('User/postGroupPerm',array('id'=>$id))}" method="post">
         <div class="box-body">
 
             <table class="table table-bordered">
@@ -76,7 +76,7 @@
     $(function(){
         $("#_gid").change( function() {
             var cp_group_id = $(this).find("option:selected").val();
-            var url = '__ROOT__'+'/index.php/Admin/Perm/showGroupPerm/id/'+cp_group_id+'.html';
+            var url = '__ROOT__'+'/index.php/Admin/User/showGroupPerm/id/'+cp_group_id+'.html';
             location.href = url;
         });
     });

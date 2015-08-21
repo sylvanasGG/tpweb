@@ -1,10 +1,18 @@
-<h1>管理组</h1>
-
+<section class="content-header">
+    <h1>
+        管理组
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 管理员</a></li>
+        <li class="active">管理员权限</li>
+    </ol>
+</section>
+<section class="content">
 <div class="box">
     <div class="box-header with-border">
 
     </div><!-- /.box-header -->
-    <form action="{:U('Perm/postGroupsList')}" method="post">
+    <form action="{:U('User/postGroupsList')}" method="post">
     <div class="box-body">
         <table class="table table-bordered table-hover">
             <colgroup>
@@ -29,10 +37,9 @@
                 <td>
                     <div class="input-group input-group-sm">
                        <input name="name[{$group['cp_group_id']}]" value="{$group['cp_group_name']}" class="form-control">
-
                     </div>
                 </td>
-                <td><a href="{:U('Perm/showGroupPerm',array('id'=>$group['cp_group_id']))}">编辑</a></td>
+                <td><a href="{:U('User/showGroupPerm',array('id'=>$group['cp_group_id']))}">编辑</a></td>
             </tr>
             </foreach>
             <tr>
@@ -65,9 +72,9 @@
     </div>
     </form>
 </div>
-
-<script type="text/javascript">
+</section>
+<script>
     $(function(){
-        bindSelectAll('#selectAll','#memberList > tr > td > input[type=checkbox]'); // 绑定全选
+        //bindSelectAll('#selectAll','#memberList > tr > td > input[type=checkbox]'); // 绑定全选
     });
 </script>

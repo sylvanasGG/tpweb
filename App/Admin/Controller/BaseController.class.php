@@ -19,6 +19,8 @@ class BaseController extends Controller {
         }
         $this->_menus = C("LAYOUT_MENU");
         $this->allowList();
+        $this->assign('_actionName',$this->getActionName());
+        $this->assign('_controllerFun',$this->getControllerFun());
         $this->assign('menus',$this->getPermMenuList());
     }
 
@@ -101,6 +103,11 @@ class BaseController extends Controller {
         }
 
         return true;
+    }
+
+    protected function getControllerFun()
+    {
+        return CONTROLLER_NAME.'/'.ACTION_NAME;
     }
 
 

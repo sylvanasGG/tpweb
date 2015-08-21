@@ -100,7 +100,7 @@
                         <a href="{:U('User/showEdit',array('id'=>$user['id']))}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="修改"></i></a>
                     </td>
                     <td class="col-lg-1">
-                        <a href="{:U('Perm/showPersonalPerm',array('id'=>$user['id']))}"><i class="fa fa-fw fa-cogs" data-toggle="tooltip" data-original-title="权限分配"></i></a>
+                        <a href="{:U('User/showPersonalPerm',array('id'=>$user['id']))}"><i class="fa fa-fw fa-cogs" data-toggle="tooltip" data-original-title="权限分配"></i></a>
                     </td>
                     <td class="col-lg-1">
                         <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{$user['id']}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>

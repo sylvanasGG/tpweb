@@ -294,6 +294,16 @@ abstract class Controller {
         }
     }
 
+    protected function getActionName() {
+        if(empty($this->name)) {
+            // 获取Action名称
+            $offset=strrpos(get_class($this), '\\', -10);  // 从尾部第 10 个位置开始查找
+            $this->name     =   substr(get_class($this),$offset+1,-10);
+        }
+        return get_class($this);
+        //return $this->name;
+    }
+
    /**
      * 析构方法
      * @access public

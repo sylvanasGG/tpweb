@@ -11,8 +11,6 @@ class VisitorController extends BaseController {
 	* 视图：用户列表
     */
     public function index(){
-
-    	//$visitors = new \Home\Model\VisitorModel();
         $visitors = M('Visitors');
     	$count      = $visitors->order('created_at desc')->count();// 查询满足要求的总记录数
         $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
