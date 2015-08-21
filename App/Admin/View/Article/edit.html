@@ -30,7 +30,8 @@
 
 
                             <div class="panel-body">
-            <form action="{:U('Article/update',array('id'=>$article['id']))}" method="POST" id="editArticleForm" enctype="multipart/form-data">
+            <form action="{:U('Article/update',array('id'=>$article['article_id']))}" method="POST" id="editArticleForm" enctype="multipart/form-data">
+                <!--<input type="hidden" name="id" value="{$article['article_id']}" />-->
                 <div class="form-group">
                     <label>文章类型</label>
                     <select class="form-control" name="article_type" id="article_type">
@@ -84,5 +85,30 @@
             return false;
         }
         $("#editArticleForm").submit();
+//        $.ajax({
+//            url: "{:U('Article/update')}",
+//            type: "post",
+//            data: $("#editArticleForm").serializeArray(),
+//            dataType: "json",
+//            success: function( result ){
+//                    layer.closeAll();
+//                if ( result.ret == 0 ) {
+//
+//                    layer.alert('编辑成功');
+//                } else
+//                {
+//                    layer.alert('编辑失败，请重新提交');
+//                }
+//            },
+//            error:function()
+//            {
+//                layer.closeAll();
+//                layer.alert('页面出错，请刷新页面后重试');
+//            }
+//        });
+//        layer.msg('提交中...',{
+//            //icon: 1,
+//            time: 10000 //2秒关闭（如果不配置，默认是3秒）
+//        });
     })
     </script>

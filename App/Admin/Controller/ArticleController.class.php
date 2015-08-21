@@ -62,17 +62,18 @@ class ArticleController extends BaseController {
         $data = $_POST;
         $user = session('admin.admin');
         $data['author'] = $user['username'];
-        $data['article_photo'] =$res? __ROOT__.'/Uploads/'.$res:__ROOT__.'/Public/img/111.jpg';
+        $this->ajaxReturn(array('data'=>$res));
+        $data['article_photo'] =$res? __ROOT__.'/uploads/'.$res:__ROOT__.'/Public/img/111.jpg';
         $data['created_at'] = date("Y-m-d H:i:s",time());
         $data['updated_at'] = date("Y-m-d H:i:s",time());
         if($article->add($data))
         {
-            session('admin.success_msg','添加成功');
-            //$this->success('评论成功');
-            $this->redirect('Article/index','', 0, '');
+            // session('admin.success_msg','添加成功');
+            // $this->redirect('Article/index','', 0, '');
             //$this->success('发表成功');
+            $this->ajaxReturn(array('ret'=>0));
         }
-        $this->error('发表失败');
+        $this->ajaxReturn(array('ret'=>1));
     }
     /**
      *视图： 编辑文章
@@ -90,22 +91,27 @@ class ArticleController extends BaseController {
      **/
     public function update($id)
     {
+        //$id = $_POST['id'];
         if($_FILES['article_photo']['name'])
         {
             $res = $this->upload($_FILES['article_photo']);
         }
         $article = new Article;
-        if($res)$article->article_photo = __ROOT__.'/Uploads/'.$res;
+        if($res)$article->article_photo = __ROOT__.'/uploads/'.$res;
         $article->article_type = $_POST['article_type'];
         $article->title = $_POST['title'];
         $article->content = $_POST['content'];
         $article->updated_at = date('Y-m-d H:i:s',time());
-        if($article->where('id='.$id)->save())
+        if($article->where('article_id='.$id)->save())
         {
+             session('admin.success_msg','编辑成功');
+            // //$this->success('评论成功');
+             $this->redirect('Article/index','', 0, '');
             //$this->success('编辑成功','/Index/index',1);
-            $this->redirect('Article/index', array('id' => $id), 1, '编辑成功');
+            //$this->redirect('Article/index', array('id' => $id), 1, '编辑成功');
+            //$this->ajaxReturn(array('ret'=>0));
         }
-        $this->error('编辑失败');
+        $this->ajaxReturn(array('ret'=>1));
     }
     /**
      *动作： 删除文章
