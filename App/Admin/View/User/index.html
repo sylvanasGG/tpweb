@@ -121,23 +121,43 @@
 <script>
     function del(e)
     {
-        if(!confirm('确定要删除吗？'))
-        {
-            return false;
-        }
-        var obj = $(e);
-        var id = obj.attr("rel");
-        $.ajax({
-            url: "{:U('User/deleteUser')}",
-            type: "get",
-            data: {"id":id},
-            dataType: "json",
-            success: function( result ){
-                if ( result.ret == 0 ) {
-                    obj.parent().parent().remove();
-                    alert(result.msg);
+        layer.confirm('确定要删除吗?', {icon: 3, title:'提示'}, function(index){
+            //do something
+            var obj = $(e);
+            var id = obj.attr("rel");
+            $.ajax({
+                url: "{:U('User/deleteUser')}",
+                type: "get",
+                data: {"id":id},
+                dataType: "json",
+                success: function( result ){
+                    if ( result.ret == 0 ) {
+                        layer.closeAll();
+                        //layer.close(index);
+                        obj.parent().parent().remove();
+                        alert(result.msg);
+                    }
                 }
-            }
+            });
+            layer.msg('请稍后');
         });
+        // if(!confirm('确定要删除吗？'))
+        // {
+        //     return false;
+        // }
+        // var obj = $(e);
+        // var id = obj.attr("rel");
+        // $.ajax({
+        //     url: "{:U('User/deleteUser')}",
+        //     type: "get",
+        //     data: {"id":id},
+        //     dataType: "json",
+        //     success: function( result ){
+        //         if ( result.ret == 0 ) {
+        //             obj.parent().parent().remove();
+        //             alert(result.msg);
+        //         }
+        //     }
+        // });
     }
 </script>

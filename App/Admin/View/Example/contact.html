@@ -1,6 +1,6 @@
 <script src="__PUBLIC__/AdminLTE/asset/js/lib.js" type="text/javascript"></script>
 <script src="__PUBLIC__/AdminLTE/asset/js/mgr.js" type="text/javascript"></script>
-<script src="__PUBLIC__/AdminLTE/asset/js/layer/layer.js" type="text/javascript"></script>
+
 <section class="content-header">
     <h1>
         联系记录
@@ -212,7 +212,7 @@
                 '<div class="modal-footer" style="padding: 10px 15px">'+
                 '<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" onclick="layer.closeAll();">取消</button>'+
                 '   '+
-                '<button type="button" class="btn btn-primary btn-sm" name="contactSubmit" id="submitC" data-url="/orders/editContactRecord/'+data+'" onclick="submitEditContact(this)">确定</button>'+
+                '<button type="button" class="btn btn-primary btn-sm" data-url="/orders/editContactRecord/'+data+'" onclick="submitEditContact(this)">确定</button>'+
                 '</div>'+
                 '</form>';
         layer.open({
@@ -239,7 +239,7 @@
         var checkbox = div.find("input:checked");
         tinyLoading.show( target );
         $.ajax({
-            url: "/example/deleteContact",
+            url: "{:U('example/deleteContact')}",
             type: "POST",
             data: $("#contactform").serializeArray(),
             dataType: "json",
@@ -259,14 +259,12 @@
     function submitAddContact(e)
     {
         $.ajax({
-            url: "/example/insertContact",
+            url: "{:U('example/insertContact')}",
             type: "post",
             data: $("#alertForm2").serializeArray(),
             dataType: "json",
             success: function( result ){
-                //tinyLoading.hide( target );
                 if ( result.ret == 0 ) {
-                    //resultMsg({ target: target, msg: result.msg });
                     $('#myModal').modal('hide');
                     var lineType = result.data.contact_type == 0 ? "打入":"打出";
                     var nextLine = result.data.contact_on  == 0 ? "否": "是" ;

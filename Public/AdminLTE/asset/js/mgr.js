@@ -155,7 +155,7 @@ function hideObj(id) {
  */
 window.tinyLoading = {
     show: function( target ) {
-        var loadingEl = $( '<div class="tiny-loading"><img alt="Loading..." src="Public/AdminLTE/asset/images/tiny-loading.gif"/></div>' );
+        var loadingEl = $( '<div class="tiny-loading"><img alt="Loading..." src="http://localhost/lazar7/tpweb/Public/AdminLTE/asset/images/tiny-loading.gif"/></div>' );
         loadingEl.css({
             display: target.css( "display" ),
             "float": target.css( "float" ),
