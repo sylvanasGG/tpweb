@@ -8,23 +8,30 @@ class CommentController extends Controller {
     public function create()
     {
         $comment = new Comment;
+        $count = $comment->where('article_id='.$_POST['article_id'])->count();
         $data = $_POST;
         $data['created_at'] = date("Y-m-d H:i:s",time());
         $data['updated_at'] = date("Y-m-d H:i:s",time());
         if($comment->add($data))
         {
-            $mod = new Article;
-            $article = $mod->where('article_id='.$_POST['article_id'])->find();
-            $msg = '文章：['.$article['title'].'] 下有新的评论：'.$_POST['content'];
+            // $mod = new Article;
+            // $article = $mod->where('article_id='.$_POST['article_id'])->find();
+            // $msg = '文章：['.$article['title'].'] 下有新的评论：'.$_POST['content'];
             //评论成功后给管理员发邮件
            // sendMail('77849093@qq.com','有人发表评论',$msg);
             
-             session('home.success_msg','评论成功');
-            //$this->success('评论成功');
-            $this->redirect('Article/show',array('id'=>$_POST['article_id']), 0, '');
+            //  session('home.success_msg','评论成功');
+            // //$this->success('评论成功');
+            // $this->redirect('Article/show',array('id'=>$_POST['article_id']), 0, '');
+            $item = array(
+                'ret' => 0,
+                'data' => $data ,
+                'key' => $count+1
+                );
+             $this->ajaxReturn($item);
         }else
         {
-        	$this->error('评论失败');
+        	$this->ajaxReturn(array('ret'=>1));
         }
         
     }

@@ -2,16 +2,19 @@
 namespace Home\Controller;
 use Think\Controller;
 use Home\Model\ArticleModel as Article;
+use Home\Model\CommentModel as Comment;
 class ArticleController extends Controller {
 
     public function show($id)
     {
         $articles = new Article;
+        $comment = new comment;
         $article = $articles->where('article_id='.$id)->find();
-        $comments = $articles->relation(true)->find($id);
+        $comments = $comment->where('article_id='.$id)->order('created_at')->select();
+        //$comments = $articles->relation(true)->find($id);
 
         $this->assign('article',$article);
-        $this->assign('comments',$comments['comment']);
+        $this->assign('comments',$comments);
         $this->display('showArticle');
     }
 

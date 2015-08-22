@@ -1,8 +1,6 @@
 
     <include file='layouts/ueditor' />
-    <script src="__PUBLIC__/kindeditor-4.1.10/kindeditor-min.js"></script>
-<script src="__PUBLIC__/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<link rel="stylesheet" href="__PUBLIC__/kindeditor-4.1.10/themes/default/default.css" />
+
     <section class="content-header">
         <h1>
             文章添加
@@ -36,11 +34,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>文章开头图片</label>
-<!--                                             <input type="file" name="article_photo"  /> -->
-                                            <button type="button" class="btn btn-primary btn-xs" name="addBtn" id="add_file1" file_num='1'>
+                                            <input type="file" name="article_photo"  />
+                                            <!-- <button type="button" class="btn btn-primary btn-xs" name="addBtn" id="add_file1" file_num='1'>
                                                 <span class="glyphicon glyphicon-plus">添加文件1</span>
                                             </button>
-                                            <span id='file1' class='remark-box icon' style='display:none'><a href="" class='picture-icon' name="file1" target="_blank" style='margin-right:0'>文件1</a><input type='hidden' name='remark_file_a' /></span>
+                                            <span id='file1' class='remark-box icon' style='display:none'><a href="" class='picture-icon' name="file1" target="_blank" style='margin-right:0'>文件1</a><input type='hidden' name='remark_file_a' /></span> -->
                                        </div>
                                         <div class="form-group">
                                             <label>文章标题</label>
@@ -111,31 +109,32 @@
         {
             return false;
         }
-        $.ajax({
-            url: "{:U('Article/store')}",
-            type: "post",
-            data: $("#createArticleForm").serializeArray(),
-            dataType: "json",
-            success: function( result ){
-                    layer.closeAll();
-                if ( result.ret == 0 ) {
+        $("#createArticleForm").submit();
+        // $.ajax({
+        //     url: "{:U('Article/store')}",
+        //     type: "post",
+        //     data: $("#createArticleForm").serializeArray(),
+        //     dataType: "json",
+        //     success: function( result ){
+        //             layer.closeAll();
+        //         if ( result.ret == 0 ) {
                     
-                    layer.alert('添加成功');
-                } else
-                {
-                    layer.alert('添加失败，请重新提交');
-                }
-            },
-            error:function()
-            {
-                layer.closeAll();
-                layer.alert('页面出错，请刷新页面后重试');
-            }
-        });
-        layer.msg('提交中...',{
-            //icon: 1,
-            time: 10000 //2秒关闭（如果不配置，默认是3秒）
-        });
+        //             layer.alert('添加成功');
+        //         } else
+        //         {
+        //             layer.alert('添加失败，请重新提交');
+        //         }
+        //     },
+        //     error:function()
+        //     {
+        //         layer.closeAll();
+        //         layer.alert('页面出错，请刷新页面后重试');
+        //     }
+        // });
+        // layer.msg('提交中...',{
+        //     //icon: 1,
+        //     time: 10000 //2秒关闭（如果不配置，默认是3秒）
+        // });
     })
     
     </script>

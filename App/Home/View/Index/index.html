@@ -30,7 +30,7 @@
         <footer class="post-footer clearfix">
             <div class="pull-left tag-list">
                 <i class="fa fa-folder-open-o"></i>
-                <a href=""><?php echo \Common\Common\ArticleLib::$ARTICLE_TYPE[$val['article_type']]?></a><a href="/tag/laravel-5-1/"></a><a href="/tag/xin-ban-ben-fa-bu/"></a>
+                <a href="{:U('Article/showArticleFeilei',array('name'=>$val[article_type]))}"><?php echo \Common\Common\ArticleLib::$ARTICLE_TYPE[$val['article_type']]?></a><a href="/tag/laravel-5-1/"></a><a href="/tag/xin-ban-ben-fa-bu/"></a>
             </div>
             <div class="pull-right share">
             </div>

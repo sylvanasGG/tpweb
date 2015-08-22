@@ -62,16 +62,15 @@ class ArticleController extends BaseController {
         $data = $_POST;
         $user = session('admin.admin');
         $data['author'] = $user['username'];
-        $this->ajaxReturn(array('data'=>$res));
         $data['article_photo'] =$res? __ROOT__.'/uploads/'.$res:__ROOT__.'/Public/img/111.jpg';
         $data['created_at'] = date("Y-m-d H:i:s",time());
         $data['updated_at'] = date("Y-m-d H:i:s",time());
         if($article->add($data))
         {
-            // session('admin.success_msg','添加成功');
-            // $this->redirect('Article/index','', 0, '');
+             session('admin.success_msg','添加成功');
+             $this->redirect('Article/index','', 0, '');
             //$this->success('发表成功');
-            $this->ajaxReturn(array('ret'=>0));
+           // $this->ajaxReturn(array('ret'=>0));
         }
         $this->ajaxReturn(array('ret'=>1));
     }
