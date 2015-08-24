@@ -253,7 +253,7 @@
     function submitAddContact(e)
     {
         $.ajax({
-            url: "{:U('example/insertContact')}",
+            url: "{:U('example/postInsertContact')}",
             type: "post",
             data: $("#alertForm2").serializeArray(),
             dataType: "json",

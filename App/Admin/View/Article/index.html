@@ -27,9 +27,9 @@
                     <colgroup>
                         <col style="width: 200px" />
                         <col style="width: 200px;" />
-                        <col style="width: 450px;" />
                         <col style="width: 200px;" />
                         <col />
+                        <col style="width: 150px;"/>
                     </colgroup>
                     <tbody>
                     <tr>
@@ -45,14 +45,7 @@
                                 <input type="text" class="form-control" aria-describedby="basic-addon1" name="author" value="{$author}">
                             </div>
                         </td>
-                        <td>
-                            <div class="input-group">
-                                <span class="input-group-addon">发布时间</span>
-                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="updated_at_start" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:true})" value="{$updated_at_start}">
-                                <span class="input-group-addon">至</span>
-                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="updated_at_end" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:true})" value="{$updated_at_end}">
-                            </div>
-                        </td>
+
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon" >类型</span>
@@ -67,13 +60,24 @@
                                 </select>
                             </div>
                         </td>
+
+                        <td colspan="2">
+                            <div class="input-group">
+                                <span class="input-group-addon">发布时间</span>
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="updated_at_start" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:true})" value="{$updated_at_start}">
+                                <span class="input-group-addon">至</span>
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="updated_at_end" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:true})" value="{$updated_at_end}">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
                         <td>
                             <div class="input-group">
                                 <button class="btn btn-primary" type="submit">搜索</button>&nbsp;&nbsp;
                                 <button class="btn btn-primary" type="button" onclick="resetForm()">重置</button>
                             </div>
                         </td>
-                        <td></td>
                     </tr>
                     </tbody>
                 </table>
