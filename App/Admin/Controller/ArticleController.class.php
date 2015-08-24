@@ -8,9 +8,45 @@ class ArticleController extends BaseController {
 
     public function index()
     {
+        $map = array();
+        $title = $author = $article_type = $updated_at_start = $updated_at_end = '';
+        $title = $_GET['title'];
+        if ($title != null) {
+            $map['title'] = array('like', "%$title%");
+        }
+
+        $author = $_GET['author'];
+        if ($author != null) {
+            $map['author'] = array('like', "%$author%");
+        }
+
+        $article_type = $_GET['article_type'];
+        if ($article_type != null) {
+            $map['article_type'] = array('eq', $article_type);
+        }
+
+        $updated_at_start = $_GET['updated_at_start'];
+        if ($updated_at_start != null) {
+            $map['updated_at'] = array('egt', $updated_at_start);
+        }
+
+        $updated_at_end = $_GET['updated_at_end'];
+        if ($updated_at_end != null) {
+            $map['updated_at'] = array('elt', $updated_at_end);
+        }
+
+        if ($updated_at_start != null && $updated_at_end != null) {
+            $map['updated_at'] = array('between', array($updated_at_start, $updated_at_end));
+        }
+        $this->assign('title', $title);
+        $this->assign('author', $author);
+        $this->assign('article_type', $article_type);
+        $this->assign('updated_at_start', $updated_at_start);
+        $this->assign('updated_at_end', $updated_at_end);
+
         $article = new \Home\Model\ArticleModel();
-        $count      = $article->order('updated_at desc')->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,3);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $count      = $article->where($map)->order('updated_at desc')->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $Page->setConfig('header','页');
         $Page->setConfig('prev','');
         $Page->setConfig('next','');
@@ -18,7 +54,7 @@ class ArticleController extends BaseController {
         $Page->setConfig('end','<<');
         $show       = $Page->show();// 分页显示输出
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        $list = $article->order('updated_at desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list = $article->where($map)->order('updated_at desc')->limit($Page->firstRow.','.$Page->listRows)->select();
         $this->assign('articles',$list);// 赋值数据集
         $this->assign('page',$show);// 赋值分页输出
         $this->assign('article_types',ArticleLib::$ARTICLE_TYPE);

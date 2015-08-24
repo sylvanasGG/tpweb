@@ -11,10 +11,24 @@ class UserController extends BaseController {
 	* 视图：用户列表
     */
     public function index(){
+        $map = array();
+        $username = $cp_group_id =  '';
+        $username = $_GET['username'];
+        if ($username != null) {
+            $map['username'] = array('like', "%$username%");
+        }
+
+        $cp_group_id = $_GET['cp_group_id'];
+        if ($cp_group_id != null) {
+            $map['cp_group_id'] = array('eq', $cp_group_id);
+        }
+
+        $this->assign('username', $username);
+        $this->assign('cp_group_id', $cp_group_id);
 
     	$users = new User;
-    	$count      = $users->order('created_at desc')->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,5);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+    	$count      = $users->where($map)->order('created_at desc')->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $Page->setConfig('header','页');
         $Page->setConfig('prev','');
         $Page->setConfig('next','');
@@ -22,7 +36,10 @@ class UserController extends BaseController {
         $Page->setConfig('end','<<');
         $show       = $Page->show();// 分页显示输出
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        $list = $users->order('created_at desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list = $users->where($map)->order('created_at desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $group = new AdminGroup;
+        $groupAll  = $group->order('cp_group_id asc')->select();
+        $this->assign('groupAll',$groupAll);
         $this->assign('users',$list);// 赋值数据集
         $this->assign('page',$show);// 赋值分页输出
         $this->display('index'); // 输出模板

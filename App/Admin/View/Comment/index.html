@@ -21,36 +21,48 @@
     <div class="box">
         <!--内容头部-->
         <div class="box-header">
-            <form action="/comment/index" method="get">
+            <form action="" method="get" id="commentSearchForm">
                 <table class="table">
                     <colgroup>
                         <col style="width: 300px;" />
-                        <col style="width: 250px;" />
-                        <col style="width: 250px;" />
-                        <col style="width: 100px"/>
+                        <col style="width: 280px;" />
+                        <col style="width: 450px;" />
+                        <col />
                     </colgroup>
                     <tbody>
                     <tr>
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon">评论内容</span>
-                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="content" value="">
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="content" value="{$content}">
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon">所属文章</span>
+                                <select class="form-control" name="article_id" id="article_id">
+                                    <option value="">--请选择--</option>
+                                    <foreach name='{articleArr}' item='val' key='key'>
+                                        <?php
+                                            $selected='';if($key == $article_id)$selected="selected='selected'"
+                                            ?>
+                                        <option value="{$key}" {$selected}><?php echo Fun::mixSub(strip_tags($val),9) ?></option>
+                                    </foreach>
+                                </select>
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon">评论时间</span>
-                                <input type="text" class="form-control" aria-describedby="basic-addon1" >
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="created_at_start" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:true})" value="{$created_at_start}">
+                                <span class="input-group-addon">至</span>
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="created_at_end" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:true})" value="{$created_at_end}">
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
-                                <button class="btn btn-primary" type="submit">搜索</button>
+                                <button class="btn btn-primary" type="submit">搜索</button>&nbsp;&nbsp;
+                                <button class="btn btn-primary" type="button" onclick="resetForm()">重置</button>
                             </div>
                         </td>
                         <td></td>
@@ -63,12 +75,12 @@
         <div class="box-body" style="overflow-x: auto;">
             <table class="table table-striped">
                 <tr class="row">
-                    <th class="col-lg-4">内容</th>
+                    <th class="col-lg-3">内容</th>
                     <th class="col-lg-1">用户</th>
-                    <th class="col-lg-3">评论文章</th>
+                    <th class="col-lg-2">评论文章</th>
                     <th class="col-lg-2">邮箱</th>
-                    <th class="col-lg-1">编辑</th>
-                    <th class="col-lg-1">删除</th>
+                    <th class="col-lg-2">评论时间</th>
+                    <th class="col-lg-2" style="text-align: center">编辑 | 删除</th>
                 </tr>
                 <foreach name='comments' item='comment'>
                 <tr class="row">
@@ -85,9 +97,10 @@
                         {$comment['email']}
                     </td>
                     <td class="col-lg-1">
-                        <a href="{:U('Comment/edit',array('id'=>$comment['id']))}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
+                        {$comment['created_at']}
                     </td>
-                    <td class="col-lg-1">
+                    <td class="col-lg-1" style="text-align: center">
+                        <a href="{:U('Comment/edit',array('id'=>$comment['id']))}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a> |
                         <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{$comment['id']}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
                     </td>
                 </tr>
@@ -124,5 +137,11 @@
                 }
             }
         });
+    }
+
+    function resetForm()
+    {
+        $("#commentSearchForm input").val('');
+        $("#commentSearchForm select").val('');
     }
 </script>

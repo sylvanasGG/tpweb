@@ -23,12 +23,11 @@
         <!--内容头部-->
         <div class="box-header">
         
-            <form action="/user/index" method="get">
+            <form action="" method="get" id="userSearchForm">
                 <table class="table">
                     <colgroup>
                         <col style="width: 300px;" />
                         <col style="width: 300px;" />
-                        <col style="width: 100px;" />
                         <col />
                     </colgroup>
                     <tbody>
@@ -36,20 +35,27 @@
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon">姓名</span>
-                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="username">
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="username" value="{$username}">
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon">管理组</span>
-                                <select class="form-control">
+                                <select name="cp_group_id" id="cp_group_id" class="form-control">
                                     <option value="">--请选择--</option>
+                                    <foreach name='groupAll' item='group'>
+                                        <?php
+                                            $selected='';if($cp_group_id == $group['cp_group_id'])$selected="selected='selected'"
+                                            ?>
+                                        <option value="{$group['cp_group_id']}" {$selected}>{$group['cp_group_name']}</option>
+                                    </foreach>
                                 </select>
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
-                                <button class="btn btn-primary" type="submit">搜索</button>
+                                <button class="btn btn-primary" type="submit">搜索</button>&nbsp;&nbsp;
+                                <button class="btn btn-primary" type="button" onclick="resetForm()">重置</button>
                             </div>
                         </td>
                         <td></td>
@@ -159,5 +165,11 @@
         //         }
         //     }
         // });
+    }
+
+    function resetForm()
+    {
+        $("#userSearchForm input").val('');
+        $("#userSearchForm select").val('');
     }
 </script>

@@ -22,13 +22,13 @@
     <div class="box">
         <!--内容头部-->
         <div class="box-header">
-            <form action="/article/index" method="get">
+            <form action="" method="get" id="articleSearchForm">
                 <table class="table">
                     <colgroup>
-                        <col style="width: 300px" />
-                        <col style="width: 250px;" />
+                        <col style="width: 200px" />
                         <col style="width: 200px;" />
-                        <col style="width: 100px;" />
+                        <col style="width: 450px;" />
+                        <col style="width: 200px;" />
                         <col />
                     </colgroup>
                     <tbody>
@@ -36,13 +36,21 @@
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon">标题</span>
-                                <input type="text" class="form-control"  aria-describedby="basic-addon1" name="title" value="">
+                                <input type="text" class="form-control"  aria-describedby="basic-addon1" name="title" value="{$title}">
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon" >作者</span>
-                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="author" value="">
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="author" value="{$author}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon">发布时间</span>
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="updated_at_start" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:true})" value="{$updated_at_start}">
+                                <span class="input-group-addon">至</span>
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="updated_at_end" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',alwaysUseStartDate:true})" value="{$updated_at_end}">
                             </div>
                         </td>
                         <td>
@@ -51,14 +59,18 @@
                                 <select class="form-control" name="article_type" id="article_type">
                                     <option value="">--请选择--</option>
                                     <foreach name='{article_types}' item='val' key='key'>
-                                        <option value="{$key}">{$val}</option>
+                                        <?php
+                                            $selected='';if($key == $article_type)$selected="selected='selected'"
+                                            ?>
+                                        <option value="{$key}" {$selected}>{$val}</option>
                                     </foreach>
                                 </select>
                             </div>
                         </td>
                         <td>
                             <div class="input-group">
-                                <button class="btn btn-primary" type="submit">搜索</button>
+                                <button class="btn btn-primary" type="submit">搜索</button>&nbsp;&nbsp;
+                                <button class="btn btn-primary" type="button" onclick="resetForm()">重置</button>
                             </div>
                         </td>
                         <td></td>
@@ -71,22 +83,20 @@
         <div class="box-body" style="overflow-x: auto;">
             <table class="table table-striped">
                 <tr class="row">
-                    <th class="col-lg-1">ID</th>
                     <th class="col-lg-2">标题</th>
                     <th class="col-lg-1">作者</th>
                     <th class="col-lg-1">文章类型</th>
                     <th class="col-lg-1">文章图片</th>
                     <th class="col-lg-4">文章内容</th>
-                    <th class="col-lg-1">编辑</th>
-                    <th class="col-lg-1">删除</th>
+                    <th class="col-lg-2">最后发布时间</th>
+                    <th class="col-lg-1" style="text-align: center">编辑 | 删除</th>
                 </tr>
                 <foreach name='articles' item='article'>
                 <tr class="row">
-                    <td class="col-lg-1">
-                        {$article['article_id']}
-                    </td>
                     <td class="col-lg-2">
-                        <span data-toggle="tooltip" data-original-title="{$article['title']}"><?php echo Fun::mixSub(strip_tags($article['title']),10)?></span>
+                        <span data-toggle="tooltip" data-original-title="{$article['title']}">
+                            <a href="{:U('Home/Article/show',array('id'=>$article['article_id']))}" target="_blank">
+                            <?php echo Fun::mixSub(strip_tags($article['title']),10)?></a></span>
                     </td>
                     <td class="col-lg-1">
                         {$article['author']}
@@ -98,12 +108,13 @@
                         <a href="{$article['article_photo']}" target="_blank">图片</a>
                     </td>
                     <td class="col-lg-4">
-                        <a href="{:U('Home/Article/show',array('id'=>$article['article_id']))}" target="_blank"><?php echo Fun::mixSub(strip_tags($article['content']),30)?></a>
+                        <?php echo Fun::mixSub(strip_tags($article['content']),30)?>
                     </td>
-                    <td class="col-lg-1">
-                        <a href="{:U('Article/edit',array('id'=>$article['article_id']))}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a>
+                    <td class="col-lg-2">
+                        {$article.updated_at}
                     </td>
-                    <td class="col-lg-1">
+                    <td class="col-lg-1" style="text-align: center">
+                        <a href="{:U('Article/edit',array('id'=>$article['article_id']))}"><i class="fa fa-fw fa-pencil" data-toggle="tooltip" data-original-title="编辑"></i></a> |
                         <a href="javascript:void(0)" id="del" onclick="del(this)" rel="{$article['article_id']}"><i class="fa fa-fw fa-remove" data-toggle="tooltip" data-original-title="删除"></i></a>
                     </td>
                 </tr>
@@ -140,5 +151,11 @@
                 }
             }
         });
+    }
+
+    function resetForm()
+    {
+        $("#articleSearchForm input").val('');
+        $("#articleSearchForm select").val('');
     }
 </script>
