@@ -11,7 +11,7 @@
                 </div>
                 <if condition="$article['article_photo']">
                     <div class="featured-media">
-                        <a href="#"><img src="{$article['article_photo']}" alt="{$article['title']}"></a>
+                        <a href="{$article['article_photo']}" target="_blank"><img src="{$article['article_photo']}" alt="{$article['title']}" style="max-height: 350px;"></a>
                     </div>
                 </if>
 
@@ -202,7 +202,7 @@
 <script src="__PUBLIC__/AdminLTE/asset/js/lib.js" type="text/javascript"></script>
 <script>
     $(function(){
-    setTimeout(unsetSession,2000); 
+    //setTimeout(unsetSession,2000);
     $("#submitComment").click(submitComment);
     });
 
@@ -218,20 +218,20 @@
 
     }
 
-    function unsetSession()
-    {
-        $.ajax({
-            url: "{:U('Comment/unsetSession')}",
-            type: "get",
-            data: '',
-            dataType: "json",
-            success: function( result ){
-                if ( result.ret == 0 ) {
-                    $("#home_success_msg").hide();
-                }
-            }
-        });
-    }
+//    function unsetSession()
+//    {
+//        $.ajax({
+//            url: "{:U('Comment/unsetSession')}",
+//            type: "get",
+//            data: '',
+//            dataType: "json",
+//            success: function( result ){
+//                if ( result.ret == 0 ) {
+//                    $("#home_success_msg").hide();
+//                }
+//            }
+//        });
+//    }
     
     function submitComment()
     {
@@ -251,16 +251,14 @@
                         [
                             [1,'<div class="nickname"><strong style="color: #3c8dbc">'+result.data.nickname+'</strong>&nbsp;&nbsp;&nbsp;'+result.data.created_at+'</div>']
                             , [1, '<span>'+result.key+'</span>楼']
-                            
                         ]
                     ];
-                    var commentTrTwo  = [
+                   var commentTrTwo  = [
                         [
                             [1,'<span>'+result.data.content+'</span>']
                             , [1, '<a href="#new" onclick="reply(this);" data-name="'+result.data.nickname+'" style="color: #3c8dbc">回复</a>']
-                            
                         ]
-                    ];
+                   ];
                     addRow('#addCommentTr',0,commentTrOne);
                     addRow('#addCommentTr',0,commentTrTwo);
                } else

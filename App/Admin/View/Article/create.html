@@ -65,34 +65,34 @@
 
     <script>
     //图片上传
-     KindEditor.ready(function(K) {
-        var editor = K.editor({
-            uploadJson      : '__ROOT__/uploads/',
-            filePostName    : 'Filedata',
-            fileFormUrl     : "#",
-            extraFileUploadParams     : {
-                '_isUpload' : true
-            }
-        });
-        K('button[name=addBtn]').click(function() {
-            var file_num = $(this).attr('file_num');
-            editor.loadPlugin('insertfile', function() {
-                editor.plugin.fileDialog({
-                    fileUrl : K('#url').val(),
-                    clickFn : function(url, title) {
-                        if(file_num == '1'){
-                            $("input[name='remark_file_a']").val(url);
-                            $('#file1').show();
-                            $('#file1').find("[name='file1']").attr('href', "/"+url);
-                        }
-
-                        // 文件上传成功 ajax 更新 资源路径和说明
-                        editor.hideDialog().focus();
-                    }
-                });
-            });
-        });
-    });
+//     KindEditor.ready(function(K) {
+//        var editor = K.editor({
+//            uploadJson      : '__ROOT__/uploads/',
+//            filePostName    : 'Filedata',
+//            fileFormUrl     : "#",
+//            extraFileUploadParams     : {
+//                '_isUpload' : true
+//            }
+//        });
+//        K('button[name=addBtn]').click(function() {
+//            var file_num = $(this).attr('file_num');
+//            editor.loadPlugin('insertfile', function() {
+//                editor.plugin.fileDialog({
+//                    fileUrl : K('#url').val(),
+//                    clickFn : function(url, title) {
+//                        if(file_num == '1'){
+//                            $("input[name='remark_file_a']").val(url);
+//                            $('#file1').show();
+//                            $('#file1').find("[name='file1']").attr('href', "/"+url);
+//                        }
+//
+//                        // 文件上传成功 ajax 更新 资源路径和说明
+//                        editor.hideDialog().focus();
+//                    }
+//                });
+//            });
+//        });
+//    });
     $("#createArticleBtn").click(function(e)
     {
         e.preventDefault();
