@@ -91,7 +91,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-10">
-                        <textarea name="content" id="newFormContent" class="form-control" rows="2" required="required" placeholder="评论"></textarea>
+                        <textarea name="content" id="content" class="form-control" rows="2" required="required" placeholder="评论"></textarea>
                         <!--<script id="editor" name="content" type="text/plain"></script>-->
                     </div>
                 </div>
@@ -235,6 +235,41 @@
     
     function submitComment()
     {
+        var go = true;
+        var email = $("#email").val();
+        if($("#nickname").val() == '')
+        {
+            $("#nickname").focus();
+            alert('昵称为必填选项');
+            go = false;
+            return false;
+        }
+        if(email == '')
+        {
+            $("#email").focus();
+            alert('邮箱为必填选项');
+            go = false;
+            return false;
+        }
+
+        if($("#content").val() == '')
+        {
+            $("#content").focus();
+            alert('评论为必填选项');
+            go = false;
+            return false;
+        }
+        var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+        if (!reg.test(email)) {
+            go = false;
+            layer.alert('邮箱有误，请重填');
+            $("#customer_phone").focus();
+        }
+
+        if(go == false)
+        {
+            return false;
+        }
        $.ajax({
            url: "{:U('Comment/create')}",
            type: "post",
