@@ -112,7 +112,7 @@
                         <a href="{$article['article_photo']}" target="_blank">图片</a>
                     </td>
                     <td class="col-lg-4">
-                        <?php echo Fun::mixSub(strip_tags($article['content']),30)?>
+                        <a href="{:U('Home/Article/show',array('id'=>$article['article_id']))}" target="_blank"><?php echo Fun::mixSub(strip_tags($article['content']),20)?></a>
                     </td>
                     <td class="col-lg-2">
                         {$article.updated_at}
