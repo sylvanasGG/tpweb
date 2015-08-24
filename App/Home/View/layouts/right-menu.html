@@ -50,7 +50,7 @@
                         '<div class="form-group" style="margin: 5px 0">'+
                         '<label for="customer_content" class="col-sm-2 control-label">需求<strong style="color: red">*</strong></label>'+
                         '<div class="col-sm-9">'+
-                        '<textarea class="form-control must" name="customer_content" id="customer_content" rows="3" cols="4" placeholder="网站各类要求，相仿的网站..." required></textarea>'+
+                        '<textarea class="form-control must" name="customer_content" id="customer_content" rows="3" cols="4" placeholder="网站各类要求，相仿的网站，报价范围..." required></textarea>'+
                         '</div>'+
                         '</div>'+
                         '<div class="form-group" style="margin: 5px 0">'+
@@ -109,7 +109,7 @@
                 success: function( result ){
                     if ( result.ret == 0 ) {
                         layer.closeAll();
-                        layer.alert('发送成功');
+                        layer.alert('发送成功,后台会与您做及时沟通');
                     } else {
                         layer.closeAll();
                         layer.alert('发送失败，请重试');
