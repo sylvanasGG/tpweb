@@ -204,6 +204,19 @@
     $(function(){
     //setTimeout(unsetSession,2000);
     $("#submitComment").click(submitComment);
+    $("#imgTitle").click(function(){
+        var src = $(this).attr('src');
+        var alt = $(this).attr('alt');
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: false,
+            area: '516px,800px',
+            skin: 'layui-layer-nobg', //没有背景色
+            shadeClose: true,
+            content: '<img id="imgTitle" src="'+src+'" alt="'+alt+'" style="max-height: 400px;">'
+        });
+    })
     });
 
     function reply(a) {
