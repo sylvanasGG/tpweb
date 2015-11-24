@@ -5,6 +5,7 @@ return array(
 	//'配置项'=>'配置值'
     // 开启路由
     'URL_ROUTER_ON'   => true,
+    'URL_MODEL' => '2',
 
     // 多个伪静态后缀设置 用|分割
     'URL_HTML_SUFFIX'=>'html|shtml|xml',
@@ -27,7 +28,6 @@ return array(
     'DB_DEBUG'  =>  TRUE, // 数据库调试模式 开启后可以记录SQL日志 3.2.3新增
     'HTML_CACHE_ON' => false, // 默认关闭静态缓存
     'DB_FIELD_CACHE'=>false,
-    'HTML_CACHE_ON'=>false,
     "LOAD_EXT_FILE"=>"Fun,ArticleLib,SendMail",
     //设置系统管理员
     'SYSTEM_ADMIN' => 1,

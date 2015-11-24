@@ -18,7 +18,10 @@ class BaseController extends Controller {
             //$this->error('请先登录...','Auth/login',2);
         }
         $this->_menus = C("LAYOUT_MENU");
-        $this->allowList();
+        if(!$this->allowList()){
+            echo '您无此权限，请联系管理员';exit;
+        }
+
         $this->assign('_actionName',$this->getActionName());
         $this->assign('_controllerFun',$this->getControllerFun());
         $this->assign('menus',$this->getPermMenuList());
@@ -63,12 +66,13 @@ class BaseController extends Controller {
     public function allowList()
     {
         $user = session('admin.admin');
-        $user['custom_access'] = ! empty($user['custom_access']) ? unserialize($user['custom_access']) : array();
+        //$user['custom_access'] = ! empty($user['custom_access']) ? unserialize($user['custom_access']) : array();
         if ($user['cp_group_id'] > 0)
         {
             //获取用户所在管理组的权限
             $adminAccess = new AdminAccess();
             $accessList = $adminAccess->where('cp_group_id='.$user['cp_group_id'])->select();
+            //var_dump($accessList);exit;
             //权限菜单
             $menuList = $this->_menus;
             foreach ($menuList as $topMenu)
@@ -77,7 +81,7 @@ class BaseController extends Controller {
                 {
                     $adminAccess = new AdminAccess();
                     $adminAccess = $adminAccess->where('cp_group_id='.$user['cp_group_id'].' AND access="'.$menu['actionName'].'"')->find();
-                    if ($adminAccess &&! in_array($adminAccess['access'], $user['custom_access']) && $menu['auth'])
+                    if ($adminAccess && $menu['auth'])
                     {
                         $menu['auth'] = is_array($menu['auth']) ? $menu['auth'] : (array)$menu['auth'];
                         foreach ($menu['auth'] as $auth)
@@ -88,18 +92,27 @@ class BaseController extends Controller {
                 }
             }
 
+            $actionName = $this->getControllerFun();
             //保存访问权限
             foreach ($accessList as $access)
             {
-                if (empty($user['custom_access']))
-                {
-                    $this->_allowAccess[$access['access']] = true;
-                } elseif ( !in_array($access['access'], $user['custom_access']))
-                {
-                    $this->_allowAccess[$access['access']] = true;
-                }
+                $this->_allowAccess[$access['access']] = true;
             }
-            return $this->_allowAccess;
+            $this->_allowAccess['Admin/index'] = true;
+            //var_dump($this->_allowAccess);exit;
+            if(!array_key_exists($actionName, $this->_allowAccess))
+            {
+                //echo 123;exit;
+                return false;
+            }
+
+
+
+//            if (isset($this->_allowAccess[$actionName]))
+//            {
+//                return $this->_allowAccess[$actionName];
+//            }
+            return true;
         }
 
         return true;

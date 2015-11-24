@@ -26,7 +26,9 @@ return array(
         'article' => array(
             'treeView' => array('name' => '文章', 'icon' => 'fa-pagelines', 'url' => '#', 'actionName' => 'Admin\Controller\ArticleController'),
             'treeViewMenu' => array(
-                array('name' => '文章列表', 'icon' => 'fa-circle-o', 'url' => "Article/index", 'actionName' => "Article/index",'auth' =>array()
+                array('name' => '文章列表', 'icon' => 'fa-circle-o', 'url' => "Article/index", 'actionName' => "Article/index",'auth' =>array(
+
+                )
                 ),
                 array('name' => '新增文章', 'icon' => 'fa-circle-o', 'url' => "Article/create", 'actionName' => 'Article/create','auth' =>array(
                     ''
@@ -45,7 +47,7 @@ return array(
             'treeView' => array('name' => '管理员', 'icon' => 'fa-user', 'url' => '#', 'actionName' => 'Admin\Controller\UserController'),
             'treeViewMenu' => array(
                 array('name' => '管理员列表', 'icon' => 'fa-circle-o', 'url' => "User/index", 'actionName' => 'User/index','auth' =>array(
-                    ''
+                    'User/showAdd'
                 )),
                 array('name' => '增加管理员', 'icon' => 'fa-circle-o', 'url' => "User/showAdd", 'actionName' => 'User/showAdd','auth' =>array(
                     ''

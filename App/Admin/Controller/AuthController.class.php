@@ -16,6 +16,7 @@ class AuthController extends Controller {
         $data = $user->where('username="'.$name.'"')->find();
         if($data && $data['password'] == md5($_POST['password']))
         {
+            session(array('name'=>'admin.admin', 'expire'=>30));
             session('admin.admin',$data);  //设置session
             $this->redirect('Admin/index', '', 0, '...');
         }
